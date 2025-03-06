@@ -1,0 +1,26 @@
+[
+  {
+      "text": "Dashboard",
+      "icon": "fa fa-dashboard",
+      "routerLink": "/dashboard",
+      "children": []
+  },
+  {
+    "text": "Home Page",
+    "icon": "fa-solid fa-house",
+    "routerLink": "/landing-page-update",
+    "children": []
+  },
+  {
+  "text": "EMER",
+  "icon": "fa-solid fa-hammer",
+  "routerLink": "/emer"
+},
+{
+  "text": "Attribute",
+  "icon": "fa-brands fa-creative-commons-nd",
+  "routerLink": "/attribute"
+}
+]
+
+

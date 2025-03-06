@@ -1,0 +1,88 @@
+<h4 mat-dialog-title>Add EMER</h4>
+<form [formGroup]="emerForm" (ngSubmit)="save()">
+  <mat-dialog-content>
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field>
+          <mat-label>EMER Number</mat-label>
+          <input formControlName="emerNumber" type="text" matInput placeholder="EMER Number" required />
+          <mat-error *ngIf="emerForm.get('emerNumber')?.touched && emerForm.get('emerNumber')?.invalid">
+            EMER number is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field>
+          <mat-label>Subject</mat-label>
+          <input formControlName="subject" type="text" matInput placeholder="Subject" required />
+          <mat-error *ngIf="emerForm.get('subject')?.touched && emerForm.get('subject')?.invalid">
+            Subject is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field>
+          <mat-label>Sub Function</mat-label>
+          <input formControlName="subFunction" type="text" matInput placeholder="Sub Function" />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field appearance="fill">
+          <mat-label>Category</mat-label>
+          <mat-select [multiple]="false" formControlName="category" (selectionChange)="getSubCategory($event.value)" panelClass="custom-dropdown" placeholder="Category">
+            <mat-option *ngFor="let category of categoryList" [value]="category.id">
+              {{ category.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field appearance="fill">
+          <mat-label>Sub Category</mat-label>
+          <mat-select [multiple]="false" formControlName="subCategory"  panelClass="custom-dropdown" (selectionChange)="getEqpt($event.value)" placeholder="Sub-Category">
+            <mat-option *ngFor="let subCategory of subCategoryList" [value]="subCategory.id">
+              {{ subCategory.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field appearance="fill">
+          <mat-label>Sub Category</mat-label>
+          <mat-select [multiple]="false" formControlName="eqpt"  panelClass="custom-dropdown" placeholder="EQPT">
+            <mat-option *ngFor="let eqpt of eqptList" [value]="eqpt.id">
+              {{ eqpt.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <mat-label>Meta Information</mat-label>
+          <textarea matInput formControlName="metaInformation" placeholder="Add meta information"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <!-- <mat-form-field>
+        <mat-label>Attach File</mat-label>
+        <input formControlName="emerFile" type="file"  placeholder="Attach File" />
+      </mat-form-field> -->
+       <!-- Custom file upload button using Material button -->
+  <button mat-raised-button (click)="fileInput.click()">Select File</button>
+  <input #fileInput type="file" style="display:none" (change)="onFileSelected($event)" />
+
+    </div>
+
+
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button type="button" class="btn btn-sm btn-danger">Reset</button>
+    <button type="button" class="btn btn-sm btn-warning">Close</button>
+    <button type="button" class="btn btn-sm btn-primary" (click)="save()">Save</button>
+  </mat-dialog-actions>
+</form>

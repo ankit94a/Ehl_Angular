@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "4WUPY+K7NDgfBGLWRgq/UxYwqz/+pLC8RvVOtq7vDSY=",
+  "Source": "EHL.Api",
+  "BasePath": "_content/EHL.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

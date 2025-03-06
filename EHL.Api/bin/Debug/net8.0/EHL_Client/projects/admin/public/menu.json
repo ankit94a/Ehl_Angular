@@ -1,0 +1,26 @@
+[
+  {
+      "text": "Dashboard",
+      "icon": "fa fa-dashboard",
+      "routerLink": "/dashboard",
+      "children": []
+  },
+  {
+    "text": "Home Page",
+    "icon": "fa fa-dashboard",
+    "routerLink": "/landing-page-update",
+    "children": []
+  },
+  {
+  "text": "EMER",
+  "icon": "fa-solid fa-hammer",
+  "routerLink": "/emer"
+},
+{
+  "text": "Attribute",
+  "icon": "fa-solid fa-hammer",
+  "routerLink": "/attribute"
+}
+]
+
+

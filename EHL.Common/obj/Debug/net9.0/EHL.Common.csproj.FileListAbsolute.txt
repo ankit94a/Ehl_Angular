@@ -1,0 +1,12 @@
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.Common\bin\Debug\net9.0\EHL.Common.deps.json
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.Common\bin\Debug\net9.0\EHL.Common.dll
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.Common\bin\Debug\net9.0\EHL.Common.pdb
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.Common\obj\Debug\net9.0\EHL.Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.Common\obj\Debug\net9.0\EHL.Common.AssemblyInfoInputs.cache
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.Common\obj\Debug\net9.0\EHL.Common.AssemblyInfo.cs
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.Common\obj\Debug\net9.0\EHL.Common.csproj.CoreCompileInputs.cache
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.Common\obj\Debug\net9.0\EHL.Common.sourcelink.json
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.Common\obj\Debug\net9.0\EHL.Common.dll
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.Common\obj\Debug\net9.0\refint\EHL.Common.dll
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.Common\obj\Debug\net9.0\EHL.Common.pdb
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.Common\obj\Debug\net9.0\ref\EHL.Common.dll

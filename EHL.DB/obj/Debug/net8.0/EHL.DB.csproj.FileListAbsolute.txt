@@ -1,0 +1,16 @@
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.DB\bin\Debug\net8.0\EHL.DB.deps.json
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.DB\bin\Debug\net8.0\EHL.DB.dll
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.DB\bin\Debug\net8.0\EHL.DB.pdb
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.DB\bin\Debug\net8.0\EHL.Common.dll
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.DB\bin\Debug\net8.0\EHL.Common.pdb
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.DB\obj\Debug\net8.0\EHL.DB.csproj.AssemblyReference.cache
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.DB\obj\Debug\net8.0\EHL.DB.GeneratedMSBuildEditorConfig.editorconfig
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.DB\obj\Debug\net8.0\EHL.DB.AssemblyInfoInputs.cache
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.DB\obj\Debug\net8.0\EHL.DB.AssemblyInfo.cs
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.DB\obj\Debug\net8.0\EHL.DB.csproj.CoreCompileInputs.cache
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.DB\obj\Debug\net8.0\EHL.DB.sourcelink.json
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.DB\obj\Debug\net8.0\EHL.DB.csproj.Up2Date
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.DB\obj\Debug\net8.0\EHL.DB.dll
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.DB\obj\Debug\net8.0\refint\EHL.DB.dll
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.DB\obj\Debug\net8.0\EHL.DB.pdb
+D:\Share\OneDrive\Desktop\EHL_Project\EHL\EHL.DB\obj\Debug\net8.0\ref\EHL.DB.dll
