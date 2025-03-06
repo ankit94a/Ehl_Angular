@@ -16,5 +16,12 @@ namespace EHL.Common.Enum
 			New = 1,
 			Old
 		}
+		[JsonConverter(typeof(StringEnumConverter))]
+		public enum DocType
+		{
+			Pdf = 1,
+			doc,
+			xlms
+		}
 	}
 }

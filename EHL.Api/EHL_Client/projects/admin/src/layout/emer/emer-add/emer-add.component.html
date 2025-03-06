@@ -23,7 +23,10 @@
       <div class="col-md-4">
         <mat-form-field>
           <mat-label>Sub Function</mat-label>
-          <input formControlName="subFunction" type="text" matInput placeholder="Sub Function" />
+          <input formControlName="subFunction" type="text" matInput placeholder="Sub Function" required />
+          <mat-error *ngIf="emerForm.get('subFunction')?.touched && emerForm.get('subFunction')?.invalid">
+            Sub Function number is required
+          </mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -31,31 +34,43 @@
       <div class="col-md-4">
         <mat-form-field appearance="fill">
           <mat-label>Category</mat-label>
-          <mat-select [multiple]="false" formControlName="category" (selectionChange)="getSubCategory($event.value)" panelClass="custom-dropdown" placeholder="Category">
+          <mat-select [multiple]="false" formControlName="category" (selectionChange)="getSubCategory($event.value)"
+            panelClass="custom-dropdown" placeholder="Category" required>
             <mat-option *ngFor="let category of categoryList" [value]="category.id">
               {{ category.name }}
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="emerForm.get('category')?.touched && emerForm.get('category')?.invalid">
+            Category number is required
+          </mat-error>
         </mat-form-field>
       </div>
       <div class="col-md-4">
         <mat-form-field appearance="fill">
           <mat-label>Sub Category</mat-label>
-          <mat-select [multiple]="false" formControlName="subCategory"  panelClass="custom-dropdown" (selectionChange)="getEqpt($event.value)" placeholder="Sub-Category">
+          <mat-select [multiple]="false" formControlName="subCategory" panelClass="custom-dropdown"
+            (selectionChange)="getEqpt($event.value)" placeholder="Sub-Category" required>
             <mat-option *ngFor="let subCategory of subCategoryList" [value]="subCategory.id">
               {{ subCategory.name }}
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="emerForm.get('subCategory')?.touched && emerForm.get('subCategory')?.invalid">
+            Sub Category number is required
+          </mat-error>
         </mat-form-field>
       </div>
       <div class="col-md-4">
         <mat-form-field appearance="fill">
-          <mat-label>Sub Category</mat-label>
-          <mat-select [multiple]="false" formControlName="eqpt"  panelClass="custom-dropdown" placeholder="EQPT">
-            <mat-option *ngFor="let eqpt of eqptList" [value]="eqpt.id">
+          <mat-label>EQPT</mat-label>
+          <mat-select [multiple]="false" formControlName="eqpt" panelClass="custom-dropdown" placeholder="EQPT"
+            required>
+            <mat-option *ngFor="let eqpt of eqptList" [value]="eqpt.name">
               {{ eqpt.name }}
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="emerForm.get('eqpt')?.touched && emerForm.get('eqpt')?.invalid">
+            EQPT number is required
+          </mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -63,26 +78,31 @@
       <div class="col">
         <mat-form-field>
           <mat-label>Meta Information</mat-label>
-          <textarea matInput formControlName="metaInformation" placeholder="Add meta information"></textarea>
+          <textarea matInput formControlName="metaInformation" placeholder="Add meta information" required></textarea>
+          <mat-error *ngIf="emerForm.get('metaInformation')?.touched && emerForm.get('metaInformation')?.invalid">
+            Meta Information is required
+          </mat-error>
         </mat-form-field>
       </div>
     </div>
     <div class="row">
-      <!-- <mat-form-field>
-        <mat-label>Attach File</mat-label>
-        <input formControlName="emerFile" type="file"  placeholder="Attach File" />
-      </mat-form-field> -->
-       <!-- Custom file upload button using Material button -->
-  <button mat-raised-button (click)="fileInput.click()">Select File</button>
-  <input #fileInput type="file" style="display:none" (change)="onFileSelected($event)" />
-
+      <div class="col-md-4">
+        <button mat-raised-button type="button" (click)="fileInput.click()" class="input-btn">Select File</button>
+        <input #fileInput type="file" style="display:none" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx, .xls, .xlsx" />
+      </div>
+      <br>
+      <!-- Display file name and file size -->
+      <div *ngIf="fileName && fileSizeFormatted">
+        <p><strong>File Name:</strong> {{ fileName }}</p>
+        <p><strong>File Size:</strong> {{ fileSizeFormatted }}</p>
+      </div>
     </div>
 
 
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button type="button" class="btn btn-sm btn-danger">Reset</button>
-    <button type="button" class="btn btn-sm btn-warning">Close</button>
-    <button type="button" class="btn btn-sm btn-primary" (click)="save()">Save</button>
+    <button type="button" class="btn btn-sm btn-danger" (click)="reset()">Reset</button>
+    <button type="button" class="btn btn-sm btn-warning" (click)="close()">Close</button>
+    <button type="submit" class="btn btn-sm btn-primary" >Save</button>
   </mat-dialog-actions>
 </form>
