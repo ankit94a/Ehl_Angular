@@ -20,6 +20,11 @@
   "text": "Attribute",
   "icon": "fa-brands fa-creative-commons-nd",
   "routerLink": "/attribute"
+},
+{
+  "text": "Policy",
+  "icon": "fa-solid fa-file-contract",
+  "routerLink": "/policy"
 }
 ]
 
