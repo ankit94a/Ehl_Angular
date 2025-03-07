@@ -4,8 +4,8 @@
     <div class="row">
       <div class="col-md-4">
         <mat-form-field>
-          <mat-label>EMER Number</mat-label>
-          <input formControlName="emerNumber" type="text" matInput placeholder="EMER Number" required />
+          <mat-label>{{'EMERNumber' | translate}}</mat-label>
+          <input formControlName="emerNumber" type="text" matInput placeholder="{{'EMERNumber' | translate}}" required />
           <mat-error *ngIf="emerForm.get('emerNumber')?.touched && emerForm.get('emerNumber')?.invalid">
             EMER number is required
           </mat-error>
@@ -13,8 +13,8 @@
       </div>
       <div class="col-md-4">
         <mat-form-field>
-          <mat-label>Subject</mat-label>
-          <input formControlName="subject" type="text" matInput placeholder="Subject" required />
+          <mat-label>{{'Subject' | translate}}</mat-label>
+          <input formControlName="subject" type="text" matInput placeholder="{{'Subject' | translate}}" required />
           <mat-error *ngIf="emerForm.get('subject')?.touched && emerForm.get('subject')?.invalid">
             Subject is required
           </mat-error>
@@ -22,8 +22,8 @@
       </div>
       <div class="col-md-4">
         <mat-form-field>
-          <mat-label>Sub Function</mat-label>
-          <input formControlName="subFunction" type="text" matInput placeholder="Sub Function" required />
+          <mat-label>{{'SubFunction' | translate}}</mat-label>
+          <input formControlName="subFunction" type="text" matInput placeholder="{{'SubFunction' | translate}}" required />
           <mat-error *ngIf="emerForm.get('subFunction')?.touched && emerForm.get('subFunction')?.invalid">
             Sub Function number is required
           </mat-error>
@@ -33,9 +33,9 @@
     <div class="row">
       <div class="col-md-4">
         <mat-form-field appearance="fill">
-          <mat-label>Category</mat-label>
+          <mat-label>{{'Category'|translate}}</mat-label>
           <mat-select [multiple]="false" formControlName="category" (selectionChange)="getSubCategory($event.value)"
-            panelClass="custom-dropdown" placeholder="Category" required>
+            panelClass="custom-dropdown" placeholder="{{'Category'|translate}}" required>
             <mat-option *ngFor="let category of categoryList" [value]="category.id">
               {{ category.name }}
             </mat-option>
@@ -47,9 +47,9 @@
       </div>
       <div class="col-md-4">
         <mat-form-field appearance="fill">
-          <mat-label>Sub Category</mat-label>
+          <mat-label>{{"SubCategory"|translate}}</mat-label>
           <mat-select [multiple]="false" formControlName="subCategory" panelClass="custom-dropdown"
-            (selectionChange)="getEqpt($event.value)" placeholder="Sub-Category" required>
+            (selectionChange)="getEqpt($event.value)" placeholder="{{'SubCategory'|translate}}" required>
             <mat-option *ngFor="let subCategory of subCategoryList" [value]="subCategory.id">
               {{ subCategory.name }}
             </mat-option>
@@ -61,8 +61,8 @@
       </div>
       <div class="col-md-4">
         <mat-form-field appearance="fill">
-          <mat-label>EQPT</mat-label>
-          <mat-select [multiple]="false" formControlName="eqpt" panelClass="custom-dropdown" placeholder="EQPT"
+          <mat-label>{{'EQPT'|translate}}</mat-label>
+          <mat-select [multiple]="false" formControlName="eqpt" panelClass="custom-dropdown" placeholder="{{'EQPT'|translate}}"
             required>
             <mat-option *ngFor="let eqpt of eqptList" [value]="eqpt.name">
               {{ eqpt.name }}
@@ -77,11 +77,8 @@
     <div class="row">
       <div class="col">
         <mat-form-field>
-          <mat-label>Meta Information</mat-label>
-          <textarea matInput formControlName="metaInformation" placeholder="Add meta information" required></textarea>
-          <mat-error *ngIf="emerForm.get('metaInformation')?.touched && emerForm.get('metaInformation')?.invalid">
-            Meta Information is required
-          </mat-error>
+          <mat-label>{{'Remarks'|translate}}</mat-label>
+          <textarea matInput formControlName="remarks" placeholder="{{'Remarks'|translate}}"></textarea>
         </mat-form-field>
       </div>
     </div>

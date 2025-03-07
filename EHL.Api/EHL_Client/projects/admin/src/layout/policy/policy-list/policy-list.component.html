@@ -1,0 +1,55 @@
+<mat-card>
+  <mat-card-header>Policy List</mat-card-header>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-md-10"></div>
+      <div class="col-md-2">
+        <button class="btn btn-link" (click)="openDailog()">+ Add Policy</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <mat-form-field appearance="fill">
+          <mat-label>Category</mat-label>
+          <mat-select [multiple]="false"
+            panelClass="custom-dropdown" placeholder="Category" [(ngModel)]="filterModel.categoryId" required>
+            <mat-option *ngFor="let category of categoryList" [value]="category.id">
+              {{ category.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field appearance="fill">
+          <mat-label>Sub Category</mat-label>
+          <mat-select [multiple]="false" [(ngModel)]="filterModel.subCategoryId" panelClass="custom-dropdown"
+            (selectionChange)="getEqpt($event.value)" placeholder="Sub-Category" required>
+            <mat-option *ngFor="let subCategory of subCategoryList" [value]="subCategory.id">
+              {{ subCategory.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field appearance="fill">
+          <mat-label>EQPT</mat-label>
+          <mat-select [multiple]="false" [(ngModel)]="filterModel.eqptId" panelClass="custom-dropdown" placeholder="EQPT"
+            required>
+            <mat-option *ngFor="let eqpt of eqptList" [value]="eqpt.id">
+              {{ eqpt.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field>
+          <mat-label>Search</mat-label>
+          <input type="text" matInput [(ngModel)]="filterModel.searchText">
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-sm btn-outline-primary">Search</button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

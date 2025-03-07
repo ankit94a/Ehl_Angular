@@ -2,11 +2,12 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SharedLibraryModule } from '../../shared-library.module';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
+import { LanguageComponent } from '../language/language.component';
 
 @Component({
   selector: 'app-header',
   standalone:true,
-  imports:[SharedLibraryModule,RouterModule],
+  imports:[SharedLibraryModule,RouterModule,LanguageComponent],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })

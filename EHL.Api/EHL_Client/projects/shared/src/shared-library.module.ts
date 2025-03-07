@@ -11,6 +11,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 // import { WarningDialogComponent } from './components/warning-dialog/warning-dialog.component';
 // import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
 import { MaterialModule } from './helpers/material';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 
@@ -30,7 +31,7 @@ import { MaterialModule } from './helpers/material';
     MaterialModule,
     // PipesModule,
     ReactiveFormsModule,
-    // TranslateModule,
+    TranslateModule,
     NgSelectModule,
     // OwlDateTimeModule,
     // OwlNativeDateTimeModule,

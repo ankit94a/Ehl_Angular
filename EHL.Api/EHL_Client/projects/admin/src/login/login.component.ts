@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { LoginModel } from 'projects/shared/src/models/login.model';
 import { ApiService } from 'projects/shared/src/service/api.service';
 import { AuthService } from 'projects/shared/src/service/auth.service';
+import { LanguageService } from 'projects/shared/src/service/language.service';
 import { SharedLibraryModule } from 'projects/shared/src/shared-library.module';
 
 @Component({
@@ -17,7 +18,7 @@ import { SharedLibraryModule } from 'projects/shared/src/shared-library.module';
 export class LoginComponent {
   loginform: FormGroup;
   showPassword = false;
-  constructor(private fb: FormBuilder,private apiService:ApiService,private authService:AuthService,private router: Router,private dialog:MatDialog){
+  constructor(private fb: FormBuilder,private apiService:ApiService,private authService:AuthService,private router: Router,private dialog:MatDialog,private languageService:LanguageService){
     this.loginform = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
@@ -37,6 +38,7 @@ export class LoginComponent {
         this.authService.setToken(res.token)
         this.authService.setUserDetails(res.user)
         this.dialog.closeAll();
+        this.languageService.setLanguage('en')
         this.router.navigate(['/dashboard']);
       }else {
         this.router.navigate(['/landing']);

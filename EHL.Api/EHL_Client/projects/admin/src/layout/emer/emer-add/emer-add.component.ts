@@ -34,7 +34,7 @@ export class EmerAddComponent {
       subCategory: ['', [Validators.required]],
       eqpt: ['', [Validators.required]],
       emerFile: [null, [Validators.required]],
-      metaInformation: ['', [Validators.required]],
+      remarks: [''],
     });
   }
   getCategory(){

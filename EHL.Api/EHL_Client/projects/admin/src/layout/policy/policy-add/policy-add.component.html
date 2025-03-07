@@ -1,0 +1,57 @@
+<h5 mat-dialog-title>Add Policy</h5>
+<form [formGroup]="policy" (ngSubmit)="save()">
+<mat-dialog-content>
+  <div class="row">
+    <div class="col-md-4">
+      <mat-form-field appearance="fill">
+        <mat-label>Policy Letter & Misc Type</mat-label>
+        <mat-select [multiple]="false" formControlName="type"
+          panelClass="custom-dropdown" placeholder="Policy letter & Misc type" required>
+          <mat-option *ngFor="let category of categoryList" [value]="category.name">
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="policy.get('type')?.touched && policy.get('type')?.invalid">
+          Policy Letter & Misc Type is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-md-4">
+      <mat-form-field appearance="fill">
+        <mat-label>Category</mat-label>
+        <mat-select [multiple]="false" formControlName="category"
+          panelClass="custom-dropdown" placeholder="Category" required>
+          <mat-option *ngFor="let category of categoryList" [value]="category.name">
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="policy.get('category')?.touched && policy.get('category')?.invalid">
+          Category number is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="col-md-4">
+      <button mat-raised-button type="button" (click)="fileInput.click()" class="input-btn">Select File</button>
+      <input #fileInput type="file" style="display:none" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx, .xls, .xlsx" />
+       <!-- Display file name and file size -->
+    <div *ngIf="fileName && fileSizeFormatted">
+      <p><strong>File Name:</strong> {{ fileName }}</p>
+      <p><strong>File Size:</strong> {{ fileSizeFormatted }}</p>
+    </div>
+    </div>
+    <br>
+
+  </div>
+  <div class="row">
+    <mat-form-field>
+      <mat-label>Remarks</mat-label>
+      <textarea matInput formControlName="remarks" placeholder="Add remarks" ></textarea>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button type="button" class="btn btn-sm btn-danger" (click)="reset()">Reset</button>
+  <button type="button" class="btn btn-sm btn-warning" (click)="close()">Close</button>
+  <button type="submit" class="btn btn-sm btn-primary" >Save</button>
+</mat-dialog-actions>
+</form>
