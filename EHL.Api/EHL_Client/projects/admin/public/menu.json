@@ -1,9 +1,9 @@
 [
   {
-      "text": "Dashboard",
-      "icon": "fa fa-dashboard",
-      "routerLink": "/dashboard",
-      "children": []
+    "text": "Dashboard",
+    "icon": "fa fa-dashboard",
+    "routerLink": "/dashboard",
+    "children": []
   },
   {
     "text": "Home Page",
@@ -12,20 +12,35 @@
     "children": []
   },
   {
-  "text": "EMER",
-  "icon": "fa-solid fa-hammer",
-  "routerLink": "/emer"
-},
-{
-  "text": "Attribute",
-  "icon": "fa-brands fa-creative-commons-nd",
-  "routerLink": "/attribute"
-},
-{
-  "text": "Policy",
-  "icon": "fa-solid fa-file-contract",
-  "routerLink": "/policy"
-}
+    "text": "EMER",
+    "icon": "fa-solid fa-hammer",
+    "routerLink": "/emer"
+  },
+  {
+    "text": "Attribute",
+    "icon": "fa-brands fa-creative-commons-nd",
+    "routerLink": "/attribute"
+  },
+  {
+    "text": "Policy",
+    "icon": "fa-solid fa-calendar",
+    "routerLink": "/policy"
+  },
+  {
+    "text": "Query",
+    "icon": "fa-solid fa-comment",
+    "routerLink": "/policy",
+    "children": [
+      {
+        "text": "Pending",
+        "icon": "fa-solid fa-file",
+        "routerLink": "/policy"
+      },
+      {
+        "text": "Solved",
+        "icon": "fa-solid fa-file-contract",
+        "routerLink": "/policy"
+      }
+    ]
+  }
 ]
-
-

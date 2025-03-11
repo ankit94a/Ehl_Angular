@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using static EHL.Common.Enum.Enum;
 namespace EHL.Common.Models
 {
@@ -14,15 +15,16 @@ namespace EHL.Common.Models
 		public long Category { get; set; }
 		public long SubCategory { get; set; }
 		public string Eqpt { get; set; }
-		public byte[] EmerFile { get; set; }
-		public string MetaInformation { get; set; }
+		public IFormFile EmerFile { get; set; }
+		public string Remarks { get; set; }
 		public long FileId { get; set; }
+		public byte[] FileBytes { get; set; }
 
-		// Additional properties to store file details
-		//public string FileName { get; set; }
-		//public long FileSize { get; set; }
-		//public string FileType { get; set; }
-	}
+        // Additional properties to store file details
+        //public string FileName { get; set; }
+        //public long FileSize { get; set; }
+        //public string FileType { get; set; }
+    }
 
 	public class Documents
 	{

@@ -20,28 +20,30 @@ namespace EHL.Api.Controllers
 			return Ok(_emmerManager.GetAllEmer());
 		}
 
-		//[HttpPost]
-		//public IActionResult AddEmer([FromForm] EmerModel emerModel, [FromForm] IFormFile emerFile)
-		//{
-		//	emerModel.CreatedBy = HttpContext.GetUserId();
-		//	emerModel.CreatedOn = DateTime.Now;
-		//	emerModel.IsActive = true;
-		//	emerModel.IsDeleted = false;
-		//	if (emerFile != null && emerFile.Length > 0)
-		//	{
-		//		// Convert the file to a byte array
-		//		using (var memoryStream = new MemoryStream())
-		//		{
-		//			emerFile.CopyTo(memoryStream);
-		//			emerModel.EmerFile = memoryStream.ToArray();  // Store file content as byte array
-		//		}
-		//	}
-		//	// Save the model to the database
-		//	return Ok(_emmerManager.AddEmer(emerModel));
-		//}
+        [HttpPost]
+        public IActionResult AddEmer([FromForm] EmerModel emerModel)
+        {
+            emerModel.CreatedBy = HttpContext.GetUserId();
+            emerModel.CreatedOn = DateTime.Now;
+            emerModel.IsActive = true;
+            emerModel.IsDeleted = false;
+
+            if (emerModel.EmerFile != null && emerModel.EmerFile.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    emerModel.EmerFile.CopyTo(memoryStream);
+                    emerModel.FileBytes = memoryStream.ToArray();  // Store file content as byte array
+                }
+            }
+
+            // Save to database
+            return Ok(_emmerManager.AddEmer(emerModel));
+        }
 
 
-		[HttpPost, Route("update")]
+
+        [HttpPost, Route("update")]
 		public IActionResult UpdateEmer([FromBody] EmerModel emerModel)
 		{
 			emerModel.UpdatedBy = HttpContext.GetUserId();
