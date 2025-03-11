@@ -35,7 +35,7 @@ namespace EHL.DB.Implements
 		{
 			try
 			{
-				string query = string.Format(@"insert into emer (emernumber,subject,subfunction,category,subcategory,eqpt,metainfo,fileid,createdby,createdon,isactive) values(@emernumber,@subject,@subfunction,@category,@subcategory,@eqpt,@metainfo,@fileid,@createdby,@createdon,@isactive)");
+				string query = string.Format(@"insert into emer (emernumber,subject,subfunction,category,subcategory,eqpt,remarks,fileid,createdby,createdon,isactive) values(@emernumber,@subject,@subfunction,@category,@subcategory,@eqpt,@remarks,@fileid,@createdby,@createdon,@isactive)");
 				var result = connection.Execute(query, emer);
 				return result > 0;
 			}

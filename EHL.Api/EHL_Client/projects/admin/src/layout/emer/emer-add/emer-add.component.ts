@@ -96,7 +96,7 @@ export class EmerAddComponent {
       formData.append('category', this.emerForm.get('category')?.value);
       formData.append('subCategory', this.emerForm.get('subCategory')?.value);
       formData.append('eqpt', this.emerForm.get('eqpt')?.value);
-      formData.append('metaInformation', this.emerForm.get('metaInformation')?.value);
+      formData.append('remarks', this.emerForm.get('remarks')?.value);
 
       // Append the file to FormData
       const fileInput = this.emerForm.get('emerFile')?.value;

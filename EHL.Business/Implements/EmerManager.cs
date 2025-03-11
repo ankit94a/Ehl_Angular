@@ -1,6 +1,7 @@
 ﻿using EHL.Business.Interfaces;
 using EHL.Common.Models;
 using EHL.DB.Interfaces;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,43 +21,58 @@ namespace EHL.Business.Implements
 		{
 			return _emerDb.GetAllEmer();
 		}
-		public bool AddEmer(EmerModel emer)
-		{
-			try
-			{
-				// Check if the file is provided
-				if (emer.EmerFile != null && emer.EmerFile.Length > 0)
-				{
-					// Create a new document object to store the file data
-					var doc = new Documents
-					{
-						//Name = Path.GetFileNameWithoutExtension(emer.EmerFile), // Store file name
-						FileType = Path.GetExtension(emer.EmerFile.ToString()),  // Store file type/extension
-						Size = emer.EmerFile.Length,  // Store file size
-						Document = emer.EmerFile // Store file content as byte array in the database
-					};
+        public bool AddEmer(EmerModel emer)
+        {
+            try
+            {
+                long fileId = 0; // Variable to store file ID
 
-					// Add the file information to the database
-					var result = _emerDb.AddFile(doc);  // Assuming AddFile handles saving file data
+                // Check if the file is provided
+                if (emer.EmerFile != null && emer.EmerFile.Length > 0)
+                {
+                    // Create a new document object to store the file data
+                    var doc = new Documents
+                    {
+                        Name = Path.GetFileName(emer.EmerFile.FileName), // Store file name
+                        FileType = Path.GetExtension(emer.EmerFile.FileName), // Store file extension
+                        Size = emer.EmerFile.Length, // Store file size
+                        Document = ConvertToByteArray(emer.EmerFile) // Convert file to byte array
+                    };
 
-					if (result > 0)
-					{
-						// Save the EmerModel information in the database
-						return _emerDb.AddEmer(emer);
-					}
-				}
+                    // Add the file information to the database and get the file ID
+                    fileId = _emerDb.AddFile(doc);
 
-				return false;
-			}
-			catch (Exception ex)
-			{
-				// Log the error
-				throw new Exception("Error while adding the EmerModel data.", ex);
-			}
-		}
+                    if (fileId == null || fileId <= 0)
+                    {
+                        throw new Exception("Failed to save the file.");
+                    }
+                }
+
+                // Assign the file ID to the EmerModel
+                emer.FileId = fileId; // Assuming EmerModel has a FileId property
+
+                // Save the EmerModel information in the database
+                return _emerDb.AddEmer(emer);
+            }
+            catch (Exception ex)
+            {
+                // Log the error
+                throw new Exception("Error while adding the EmerModel data.", ex);
+            }
+        }
+
+        // Helper function to convert IFormFile to byte array
+        private byte[] ConvertToByteArray(IFormFile file)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                file.CopyTo(memoryStream);
+                return memoryStream.ToArray();
+            }
+        }
 
 
-		public bool UpdateEmer(EmerModel emer)
+        public bool UpdateEmer(EmerModel emer)
 		{
 			return _emerDb.UpdateEmer(emer);
 		}
