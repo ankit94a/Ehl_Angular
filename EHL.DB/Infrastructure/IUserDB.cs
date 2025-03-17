@@ -10,5 +10,6 @@ namespace EHL.DB.Infrastructure
 	public interface IUserDB
 	{
 		public UserDetails GetUserByEmailPassword(string userName, string password);
+		public List<RolePermission> GetAllRolePermission(long RoleId);
 	}
 }

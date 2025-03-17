@@ -30,5 +30,18 @@ namespace EHL.DB.Implements
 				throw;
 			}
 		}
+		public List<RolePermission> GetAllRolePermission(long RoleId)
+		{
+			try
+			{
+				string query = string.Format(@"Select * from rolepermission  where  roleid=@roleid");
+				var result = connection.Query<RolePermission>(query, new { roleid = RoleId }).ToList();
+				return result;
+			}
+			catch (Exception ee)
+			{
+				throw;
+			}
+		}
 	}
 }

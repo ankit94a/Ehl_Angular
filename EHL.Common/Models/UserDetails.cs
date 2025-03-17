@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static EHL.Common.Enum.Enum;
 
 namespace EHL.Common.Models
 {
@@ -15,5 +16,16 @@ namespace EHL.Common.Models
 		public int RoleType { get; set; }
 		public string UserName { get; set; }
 		public string Password { get; set; }
+	}
+	public class RolePermission : Base
+	{
+		public long RoleId { get; set; }
+		public PermissionAction PermissionAction { get; set; }
+		public PermissionItem PermissionName { get; set; }
+
+		public RolePermission Clone()
+		{
+			return (RolePermission)MemberwiseClone();
+		}
 	}
 }

@@ -22,5 +22,9 @@ namespace EHL.Business.Implements
 		{
 			return _userDB.GetUserByEmailPassword(userName, password);
 		}
+		public List<RolePermission> GetAllRolePermission(long RoleId)
+		{
+			return _userDB.GetAllRolePermission(RoleId);
+		}
 	}
 }

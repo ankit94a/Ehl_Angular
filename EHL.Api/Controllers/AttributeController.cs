@@ -13,6 +13,15 @@ namespace EHL.Api.Controllers
 		{
 			_attributeManager = attributeManager;
 		}
+		[HttpPost, Route("wing")]
+		public IActionResult AddCategory([FromBody] Wing wing)
+		{
+			wing.CreatedBy = HttpContext.GetUserId();
+			wing.CreatedOn = DateTime.Now;
+			wing.IsDeleted = false;
+			wing.IsActive = true;
+			return Ok(_attributeManager.AddWing(wing));
+		}
 		[HttpPost, Route("category")]
 		public IActionResult AddCategory([FromBody] Category category)
 		{
@@ -43,10 +52,15 @@ namespace EHL.Api.Controllers
 			eqpt.IsActive = true;
 			return Ok(_attributeManager.AddEqpt(eqpt));
 		}
-		[HttpGet, Route("category")]
+		[HttpGet, Route("wing")]
 		public IActionResult GetCategory()
 		{
-			return Ok(_attributeManager.GetCategories());
+			return Ok(_attributeManager.GetWing());
+		}
+		[HttpGet, Route("category{wingId}")]
+		public IActionResult GetWing(long wingId)
+		{
+			return Ok(_attributeManager.GetCategories(wingId));
 		}
 		[HttpGet, Route("subcategory{categoryId}")]
 		public IActionResult GetSubCategory(long categoryId)

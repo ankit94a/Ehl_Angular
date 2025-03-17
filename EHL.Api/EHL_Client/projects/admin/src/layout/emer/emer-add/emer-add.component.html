@@ -31,35 +31,50 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-6">
+        <mat-form-field appearance="fill">
+          <mat-label>Wing</mat-label>
+          <mat-select [multiple]="false" formControlName="wingId" (selectionChange)="getCategory($event.value)" panelClass="custom-dropdown" placeholder="Wing">
+            <mat-option *ngFor="let wing of wing" [value]="wing.id">
+              {{ wing.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="emerForm.get('wing')?.touched && emerForm.get('wing')?.invalid">
+            Wing is required
+          </mat-error>
+        </mat-form-field>
+    </div>
+      <div class="col-md-6">
         <mat-form-field appearance="fill">
           <mat-label>{{'Category'|translate}}</mat-label>
-          <mat-select [multiple]="false" formControlName="category" (selectionChange)="getSubCategory($event.value)"
+          <mat-select [multiple]="false" formControlName="categoryId" (selectionChange)="getSubCategory($event.value)"
             panelClass="custom-dropdown" placeholder="{{'Category'|translate}}" required>
             <mat-option *ngFor="let category of categoryList" [value]="category.id">
               {{ category.name }}
             </mat-option>
           </mat-select>
-          <mat-error *ngIf="emerForm.get('category')?.touched && emerForm.get('category')?.invalid">
-            Category number is required
+          <mat-error *ngIf="emerForm.get('categoryId')?.touched && emerForm.get('categoryId')?.invalid">
+            Category is required
           </mat-error>
         </mat-form-field>
       </div>
-      <div class="col-md-4">
+    </div>
+    <div class="row">
+      <div class="col-md-6">
         <mat-form-field appearance="fill">
           <mat-label>{{"SubCategory"|translate}}</mat-label>
-          <mat-select [multiple]="false" formControlName="subCategory" panelClass="custom-dropdown"
+          <mat-select [multiple]="false" formControlName="subCategoryId" panelClass="custom-dropdown"
             (selectionChange)="getEqpt($event.value)" placeholder="{{'SubCategory'|translate}}" required>
             <mat-option *ngFor="let subCategory of subCategoryList" [value]="subCategory.id">
               {{ subCategory.name }}
             </mat-option>
           </mat-select>
-          <mat-error *ngIf="emerForm.get('subCategory')?.touched && emerForm.get('subCategory')?.invalid">
-            Sub Category number is required
+          <mat-error *ngIf="emerForm.get('subCategoryId')?.touched && emerForm.get('subCategoryId')?.invalid">
+            Sub Category is required
           </mat-error>
         </mat-form-field>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-6">
         <mat-form-field appearance="fill">
           <mat-label>{{'EQPT'|translate}}</mat-label>
           <mat-select [multiple]="false" formControlName="eqpt" panelClass="custom-dropdown" placeholder="{{'EQPT'|translate}}"

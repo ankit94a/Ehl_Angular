@@ -18,3 +18,23 @@ export enum Language{
   gj="ગુજરાતી (Gujarati)",
   bg="বাংলা (Bengali)"
 }
+
+export enum PermissionItem {
+  SchoolDetails = "SchoolDetails",
+  UserDetails = "UserDetails",
+  Classes = "Classes",
+  Subjects = "Subjects",
+  AddSubjectToBoard = "AddSubjectToBoard",
+  StudentsDetail = "StudentsDetail",
+  AddScholarShips = "AddScholarShips",
+  TeachersDetail = "TeachersDetail"
+}
+export enum PermissionAction {
+  Create = "Create",
+  Update = "Update",
+  UpdateAll = "Update All",
+  View = "View",
+  ViewAll = "View All",
+  Delete = "Delete",
+  DeleteAll= "Delete All"
+}

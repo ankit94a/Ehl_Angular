@@ -33,9 +33,9 @@
   }
   .submenu.expanded {
     display: block;
-    max-height: 300px; 
+    max-height: 300px;
   }
-  
+
 .sidebar-img{
-  background-image: url('../../../../admin/public/sidebar-1.jpg');
+  /* background-image: url('../../../../admin/public/sidebar-1.jpg'); */
 }

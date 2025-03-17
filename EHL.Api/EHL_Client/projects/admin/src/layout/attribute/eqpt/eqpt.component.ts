@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { Category, Eqpt, SubCategory } from 'projects/shared/src/models/attribute.model';
+import { Category, Eqpt, SubCategory, Wing } from 'projects/shared/src/models/attribute.model';
 import { ApiService } from 'projects/shared/src/service/api.service';
 import { SharedLibraryModule } from 'projects/shared/src/shared-library.module';
 
@@ -16,14 +16,22 @@ export class EqptComponent {
   categoryList:Category[]=[];
   subCategoryList:SubCategory[]=[];
   eqpt:Eqpt=new Eqpt();
+    wing:Wing[]=[]
    constructor(private apiService:ApiService,private toastr:ToastrService,private dailogRef:MatDialogRef<EqptComponent>){
-      this.getCategory();
+      this.getWing();
     }
-    getCategory(){
-      this.apiService.getWithHeaders('attribute/category').subscribe(res =>{
+    getCategory(categoryId){
+      this.apiService.getWithHeaders('attribute/category'+categoryId).subscribe(res =>{
         if(res){
           this.categoryList=res;
 
+        }
+      })
+    }
+    getWing(){
+      this.apiService.getWithHeaders('attribute/wing').subscribe(res =>{
+        if(res){
+        this.wing=res;
         }
       })
     }

@@ -21,7 +21,7 @@ namespace EHL.DB.Implements
 		{
 			try
 			{
-				string query = string.Format(@"select * from emer where isactive = 1");
+				string query = string.Format(@"select e.*,d.name as filename,d.size as filesize from emer e left join documents d on e.fileid = d.id   where e.isactive = 1");
 				var result = connection.Query<EmerModel>(query).ToList();
 				return result;
 			}
@@ -35,15 +35,28 @@ namespace EHL.DB.Implements
 		{
 			try
 			{
-				string query = string.Format(@"insert into emer (emernumber,subject,subfunction,category,subcategory,eqpt,remarks,fileid,createdby,createdon,isactive) values(@emernumber,@subject,@subfunction,@category,@subcategory,@eqpt,@remarks,@fileid,@createdby,@createdon,@isactive)");
+				// Ensure that CreatedOn and UpdatedOn are DateTime values before the insert
+				if (emer.CreatedOn == default)
+					emer.CreatedOn = DateTime.Now;
+
+				if (emer.UpdatedOn == default)
+					emer.UpdatedOn = DateTime.Now;
+
+				string query = @"insert into emer 
+                            (emernumber, subject, subfunction, category, subcategory, categoryid, subcategoryid, eqpt, remarks, fileid, createdby, createdon, isactive,wing,wingid)
+                          values 
+                            (@emernumber, @subject, @subfunction, @category, @subcategory, @categoryid, @subcategoryid, @eqpt, @remarks, @fileid, @createdby, @createdon, @isactive,@wing,@wingid)";
+
 				var result = connection.Execute(query, emer);
 				return result > 0;
 			}
 			catch (Exception ex)
 			{
+				// Handle exception (Log it)
 				throw ex;
 			}
 		}
+
 		public bool UpdateEmer(EmerModel emer)
 		{
 			try

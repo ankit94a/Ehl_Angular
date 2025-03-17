@@ -1,6 +1,7 @@
 ﻿using EHL.Api.Authorization;
 using EHL.Business.Interfaces;
 using EHL.Common.Models;
+using InSync.Api.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EHL.Api.Controllers
@@ -33,6 +34,13 @@ namespace EHL.Api.Controllers
 				response = Ok(new { token = jwtToken, user = model });
 			}
 			return response;
+		}
+
+		[HttpGet,Route("rolepermission")]
+		public IActionResult GetRolePermission()
+		{
+			var roleId = HttpContext.GetRoleId();
+			return Ok(_userManager.GetAllRolePermission(roleId));
 		}
 	}
 }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedLibraryModule } from '../../shared-library.module';
+import { AuthService } from '../../service/auth.service';
 // import { SharedModule } from 'projects/shared/src/public-api';
 
 @Component({
@@ -17,28 +18,27 @@ export class SidebarComponent implements OnInit {
   permissionList: any = [];
   @Output() sidenavClose = new EventEmitter();
   @Output() isloaded = new EventEmitter();
-  constructor(private http: HttpClient) {
-    this.http.get<any[]>('/menu.json').subscribe(data => {
-      this.sideBarMenus = data;
-    });
+  roleType;
+  constructor(private http: HttpClient,private authService:AuthService) {
+    this.roleType = this.authService.getRoleType();
+    this.filterSideBar()
   }
 
   ngOnInit() {
 
   }
+
+  filterSideBar(){
+    this.http.get<any[]>('/menu.json').subscribe(data => {
+      this.sideBarMenus = data;
+    });
+  }
   public onSidenavClose = () => {
     this.sidenavClose.emit();
   }
-  // addExpandClass(element: any) {
 
-  //   if (element === this.showMenu) {
-  //     this.showMenu = '0';
-  //   } else {
-  //     this.showMenu = element;
-  //   }
-  // }
   addExpandClass(menuText: string) {
     this.showMenu = this.showMenu === menuText ? '' : menuText;
   }
-  
+
 }

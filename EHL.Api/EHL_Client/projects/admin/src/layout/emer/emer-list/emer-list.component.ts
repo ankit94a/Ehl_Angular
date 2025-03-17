@@ -4,31 +4,97 @@ import { SharedLibraryModule } from 'projects/shared/src/shared-library.module';
 import { EmerAddComponent } from '../emer-add/emer-add.component';
 import { ApiService } from 'projects/shared/src/service/api.service';
 import { TablePaginationSettingsConfig } from 'projects/shared/src/component/zipper-table/table-settings.model';
+import { ZipperTableComponent } from 'projects/shared/src/component/zipper-table/zipper-table.component';
+import { Category } from 'projects/shared/src/models/attribute.model';
+import { EmerModel } from 'projects/shared/src/models/emer.model';
 
 @Component({
   selector: 'app-emer-list',
   standalone: true,
-  imports: [SharedLibraryModule],
+  imports: [SharedLibraryModule,ZipperTableComponent],
   templateUrl: './emer-list.component.html',
   styleUrl: './emer-list.component.scss'
 })
 export class EmerListComponent extends TablePaginationSettingsConfig{
-  emerList;
+  emerList:EmerModel[]=[];
+  isRefresh:boolean=false;
+    // categoryList:Category[]=[];
   constructor(private dialoagService:BISMatDialogService,private apiService:ApiService){
     super();
+    this.tablePaginationSettings.enableAction = true;
+    this.tablePaginationSettings.enableEdit = true;
+    this.tablePaginationSettings.enableView = true;
+    // this.tablePaginationSettings.enableDelete = true;
+    this.tablePaginationSettings.enableColumn = true;
+    this.tablePaginationSettings.pageSizeOptions = [50, 100];
+    this.tablePaginationSettings.showFirstLastButtons = false
+
+    // this.getCategory()
+    this.getList();
   }
   getList(){
-    this.apiService.getWithHeaders("").subscribe(res =>{
+    this.apiService.getWithHeaders("emer").subscribe(res =>{
       if(res){
         this.emerList = res;
       }
     })
   }
+  edit(row){
+
+  }
+  view(row){
+
+  }
   openDialog(){
     this.dialoagService.open(EmerAddComponent,null).then(res =>{
       if(res){
-
+        this.getList()
       }
     });
   }
+
+  getFileId(row){
+    debugger
+  }
+  getReadableFileSize(size: number): string {
+    if (size < 1024) return `${size} bytes`;
+    else if (size < 1048576) return `${(size / 1024).toFixed(2)} KB`;
+    else return `${(size / 1048576).toFixed(2)} MB`;
+  }
+  columns = [
+    {
+      name: 'fileName', displayName: 'File', isSearchable: false,hide: false,valueType:'link',valuePrepareFunction:(row) =>{
+        return row.fileName + " | Size =  " +this.getReadableFileSize(row.fileSize)
+      }
+    },
+    {
+      name: 'emerNumber', displayName: 'EmerNumber', isSearchable: true,hide: false,type:'text'
+    },
+    {
+      name: 'subject', displayName: 'Subject', isSearchable: true,hide: false,type:'text'
+    },
+    {
+      name: 'subFuntion', displayName: 'Sub Funtion', isSearchable: true,hide: false,type:'text'
+    },
+    {
+      name: 'wing', displayName: 'Wing', isSearchable: true,hide: false,type:'text'
+    },
+    {
+      name: 'category', displayName: 'Category', isSearchable: true,hide: false,type:'text'
+    },
+    // {
+    //   name: 'category', type: 'dropdown', displayName: 'Category',
+    //   dropDownList: this.categoryList
+    // },
+    {
+      name: 'subCategory', displayName: 'Sub Category', isSearchable: true,hide: false,type:'text'
+    },
+    {
+      name: 'eqpt', displayName: 'EQPT', isSearchable: true,hide: false,type:'text'
+    },
+    {
+      name: 'remarks', displayName: 'Remarks', isSearchable: true,hide: true,type:'text'
+    },
+
+  ]
 }

@@ -9,8 +9,10 @@ namespace EHL.Business.Interfaces
 {
 	public interface IAttributeManager
 	{
+		public List<Wing> GetWing();
+		public bool AddWing(Wing wing);
 		public bool AddCategory(Category category);
-		public List<Category> GetCategories();
+		public List<Category> GetCategories(long wingId);
 		public bool DeactivateCategory(long Id);
 		public bool AddSubCategory(SubCategory subCategory);
 		public List<SubCategory> GetSubCategories(long categoryId);

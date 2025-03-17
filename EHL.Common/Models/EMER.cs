@@ -12,19 +12,23 @@ namespace EHL.Common.Models
 		public string EmerNumber { get; set; }
 		public string Subject { get; set; }
 		public string SubFunction { get; set; }
-		public long Category { get; set; }
-		public long SubCategory { get; set; }
+		public long CategoryId { get; set; }
+		public long SubCategoryId { get; set; }
+		public string Category { get; set; }
+		public string SubCategory { get; set; }
 		public string Eqpt { get; set; }
 		public IFormFile EmerFile { get; set; }
 		public string Remarks { get; set; }
 		public long FileId { get; set; }
 		public byte[] FileBytes { get; set; }
 
-        // Additional properties to store file details
-        //public string FileName { get; set; }
-        //public long FileSize { get; set; }
-        //public string FileType { get; set; }
-    }
+		// Additional properties to store file details
+		public string FileName { get; set; }
+		public long FileSize { get; set; }
+		public string Wing { get; set; }
+		public int WingId { get; set; }
+		//public string FileType { get; set; }
+	}
 
 	public class Documents
 	{
