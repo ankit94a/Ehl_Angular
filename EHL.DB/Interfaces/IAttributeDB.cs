@@ -9,8 +9,10 @@ namespace EHL.DB.Interfaces
 {
 	public interface IAttributeDB
 	{
+		public bool AddWing(Wing wing);
+		public List<Wing> GetWing();
 		public bool AddCategory(Category category);
-		public List<Category> GetCategories();
+		public List<Category> GetCategories(long wingId);
 		public bool DeactivateCategory(long Id);
 		public bool AddSubCategory(SubCategory subCategory);
 		public List<SubCategory> GetSubCategories(long categoryId);

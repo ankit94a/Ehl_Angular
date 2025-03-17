@@ -16,18 +16,26 @@ namespace EHL.DB.Implements
 		{
 
 		}
-
+		public bool AddWing(Wing wing)
+		{
+			string query = string.Format(@"insert into wing (name,createdby,createdon,isactive) values(@name,@createdby,@createdon,@isactive)");
+			return connection.Execute(query, wing) > 0;
+		}
 		public bool AddCategory(Category category)
 		{
 			category.Name = category.Name.ToUpper();
-			string query = string.Format(@"insert into category (name,createdby,createdon,isactive) values(@name,@createdby,@createdon,@isactive)");
+			string query = string.Format(@"insert into category (name,createdby,createdon,isactive,wingid) values(@name,@createdby,@createdon,@isactive,@wingid)");
 			return connection.Execute(query, category) > 0;
 		}
-
-		public List<Category> GetCategories()
+		public List<Wing> GetWing()
 		{
-			string query = string.Format(@"select * from category where isactive=1");
-			return connection.Query<Category>(query).ToList();
+			string query = string.Format(@"select * from wing where isactive=1");
+			return connection.Query<Wing>(query).ToList();
+		}
+		public List<Category> GetCategories(long wingId)
+		{
+			string query = string.Format(@"select * from category where wingid=@wingid and isactive=1");
+			return connection.Query<Category>(query,new {wingid = wingId}).ToList();
 		}
 		public bool DeactivateCategory(long Id)
 		{

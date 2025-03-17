@@ -10,5 +10,6 @@ namespace EHL.Business.Interfaces
 	public interface IUserManager
 	{
 		public UserDetails GetUserByEmailPassword(string userName, string password);
+		public List<RolePermission> GetAllRolePermission(long RoleId);
 	}
 }

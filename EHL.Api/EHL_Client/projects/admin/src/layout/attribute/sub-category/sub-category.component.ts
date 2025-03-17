@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
-import { Category, SubCategory } from 'projects/shared/src/models/attribute.model';
+import { Category, SubCategory, Wing } from 'projects/shared/src/models/attribute.model';
 import { ApiService } from 'projects/shared/src/service/api.service';
 import { SharedLibraryModule } from 'projects/shared/src/shared-library.module';
 
@@ -16,12 +16,20 @@ export class SubCategoryComponent {
   subCategory:SubCategory=new SubCategory();
   categoryList:Category[]=[];
   categoryId:number;
+  wing:Wing[]=[]
   constructor(private apiService:ApiService,private toastr:ToastrService,private dailogRef:MatDialogRef<SubCategoryComponent>){
-    this.getCategory();
-  }
+    this.getWing();
 
-  getCategory(){
-    this.apiService.getWithHeaders('attribute/category').subscribe(res =>{
+  }
+  getWing(){
+    this.apiService.getWithHeaders('attribute/wing').subscribe(res =>{
+      if(res){
+      this.wing=res;
+      }
+    })
+  }
+  getCategory(categoryId){
+    this.apiService.getWithHeaders('attribute/category'+categoryId).subscribe(res =>{
       if(res){
         this.categoryList=res;
 

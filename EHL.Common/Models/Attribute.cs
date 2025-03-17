@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace EHL.Common.Models
 {
-	public class Category : Base
+	public class Wing : Base
 	{
 		public string Name { get; set; }
+	}
+	public class Category : Wing
+	{
+		public int WingId { get; set; }
 	}
 	public class SubCategory : Category
 	{

@@ -9,5 +9,11 @@
     </div>
 
   </mat-card-title>
-
+  <mat-card-content>
+    <app-table *ngIf="emerList.length > 0" [rowData]="emerList" [tablePaginationSettings]="tablePaginationSettings"
+      [enableCheckbox]="true" [isRowBackgroundColor]="true" [isRefresh]="isRefresh" [allowMultiSelect]="true"
+      (edit)="edit($event)" (view)="view($event)" [sqColumnDefinition]="columns" (getFileId)="getFileId($event)"
+      >
+    </app-table>
+  </mat-card-content>
 </mat-card>

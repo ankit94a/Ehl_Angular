@@ -16,14 +16,21 @@ namespace EHL.Business.Implements
 		{
 			_attributeDb = attributeDB;
 		}
-
+		public List<Wing> GetWing()
+		{
+			return _attributeDb.GetWing();
+		}
+		public bool AddWing(Wing wing)
+		{
+			return _attributeDb.AddWing(wing);
+		}
 		public bool AddCategory(Category category)
 		{
 			return _attributeDb.AddCategory(category);
 		}
-		public List<Category> GetCategories()
+		public List<Category> GetCategories(long wingId)
 		{
-			return _attributeDb.GetCategories();
+			return _attributeDb.GetCategories(wingId);
 		}
 		public bool DeactivateCategory(long Id)
 		{
