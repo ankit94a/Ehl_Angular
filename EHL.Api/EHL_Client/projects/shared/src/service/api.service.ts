@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, EMPTY, map, Observable, of } from 'rxjs';
 import { environment } from '../enviroments/environments.development';
@@ -20,6 +20,24 @@ export class ApiService {
       catchError((error) => {
         this.showError(error);
         return of(null);
+      })
+    );
+  }
+  getWithHeaderToDownload(url: string, dataId: any): Observable<Blob> {
+    const headers = new HttpHeaders({
+      'Accept': 'application/octet-stream' // Ensures the backend returns binary data
+    });
+
+    return this.http.get(`${this.baseUrl}${url}/${dataId}`,  {
+      headers: headers,
+      responseType: 'blob' as 'json' // Ensures the response is correctly treated as a Blob
+    }).pipe(
+      map((res: Blob) => res),
+      catchError((error: any) => {
+        if (error.status === 401) {
+          return this.showError(error);
+        }
+        return this.showError(error);
       })
     );
   }

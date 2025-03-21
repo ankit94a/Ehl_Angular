@@ -29,7 +29,7 @@ export class LandingPageComponent {
   }
   ngOnInit() {
     this.getAllNews();
-    this.getProfile();
+    // this.getProfile();
   }
   getAllNews() {
     this.apiService.getWithHeaders('landingpage/news').subscribe(res => {

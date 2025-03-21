@@ -21,8 +21,8 @@ export class EmerAddComponent {
   eqptList:Eqpt[]=[];
   fileName: string | null = null;
   fileSizeFormatted: string | null = null;
-    wing:Wing[]=[]
-
+  wing:Wing[]=[]
+  subNarrowFunctionDropdown = [];
   constructor(private apiService:ApiService,private fb: FormBuilder,private dialogRef:MatDialogRef<EmerAddComponent>,private toastr:ToastrService){
         this.createForm();
         this.getWing();
@@ -137,7 +137,15 @@ export class EmerAddComponent {
       });
     }
   }
-
+  getSubFunctionField(subFunction){
+    if(subFunction == 'Scales'){
+      this.subNarrowFunctionDropdown = ['Initial stocking guides and maintenance scales','Initial stocking guides','maintenance scales','Special maintenance scales','War maintenance scales','Special maintenance tools'];
+    }else if(subFunction == 'Inspection std and condemnation limits'){
+      this.subNarrowFunctionDropdown = ['Field Ins Stds','Base Insp Stds'];
+    }else{
+      this.subNarrowFunctionDropdown = [];
+    }
+  }
   close(){
     this.dialogRef.close(true);
   }

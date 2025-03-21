@@ -10,7 +10,7 @@ namespace EHL.Business.Interfaces
 	public interface IEmerManager
 	{
 		public List<EmerModel> GetAllEmer();
-		public bool AddEmer(EmerModel emer);
+		public Task<bool> AddEmer(EmerModel emer);
 		public bool UpdateEmer(EmerModel emer);
 		public bool DeactivateEmer(long Id);
 	}

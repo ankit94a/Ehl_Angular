@@ -7,6 +7,7 @@ import { TablePaginationSettingsConfig } from 'projects/shared/src/component/zip
 import { ZipperTableComponent } from 'projects/shared/src/component/zipper-table/zipper-table.component';
 import { Category } from 'projects/shared/src/models/attribute.model';
 import { EmerModel } from 'projects/shared/src/models/emer.model';
+import { DownloadService } from 'projects/shared/src/service/download.service';
 
 @Component({
   selector: 'app-emer-list',
@@ -19,7 +20,7 @@ export class EmerListComponent extends TablePaginationSettingsConfig{
   emerList:EmerModel[]=[];
   isRefresh:boolean=false;
     // categoryList:Category[]=[];
-  constructor(private dialoagService:BISMatDialogService,private apiService:ApiService){
+  constructor(private dialoagService:BISMatDialogService,private apiService:ApiService,private downloadService:DownloadService){
     super();
     this.tablePaginationSettings.enableAction = true;
     this.tablePaginationSettings.enableEdit = true;
@@ -53,9 +54,32 @@ export class EmerListComponent extends TablePaginationSettingsConfig{
     });
   }
 
-  getFileId(row){
-    debugger
+  getFileId(row: any) {
+    var result = this.downloadService.download(row.fileId,'file/download')
+    // this.apiService.getWithHeaders(`file/download/${row.fileId}`).subscribe(response => {
+    //   debugger
+    //   if (response) {
+    //     const blob = new Blob([response], { type: response.type });
+    //     const url = window.URL.createObjectURL(blob);
+    //     const a = document.createElement('a');
+    //     a.href = url;
+    //     a.download = this.getFileNameFromResponse(response);
+    //     document.body.appendChild(a);
+    //     a.click();
+    //     document.body.removeChild(a);
+    //     window.URL.revokeObjectURL(url);
+    //   }
+    // });
   }
+  private getFileNameFromResponse(response: any): string {
+    const contentDisposition = response.headers.get('content-disposition');
+    if (contentDisposition) {
+      const matches = contentDisposition.match(/filename="(.+)"/);
+      return matches ? matches[1] : 'downloaded_file';
+    }
+    return 'downloaded_file';
+  }
+
   getReadableFileSize(size: number): string {
     if (size < 1024) return `${size} bytes`;
     else if (size < 1048576) return `${(size / 1024).toFixed(2)} KB`;
@@ -68,6 +92,18 @@ export class EmerListComponent extends TablePaginationSettingsConfig{
       }
     },
     {
+      name: 'wing', displayName: 'Wing', isSearchable: true,hide: false,type:'text'
+    },
+    {
+      name: 'category', displayName: 'Category', isSearchable: true,hide: false,type:'text'
+    },
+    {
+      name: 'subCategory', displayName: 'Sub Category', isSearchable: true,hide: false,type:'text'
+    },
+    {
+      name: 'eqpt', displayName: 'EQPT', isSearchable: true,hide: false,type:'text'
+    },
+    {
       name: 'emerNumber', displayName: 'EmerNumber', isSearchable: true,hide: false,type:'text'
     },
     {
@@ -76,22 +112,7 @@ export class EmerListComponent extends TablePaginationSettingsConfig{
     {
       name: 'subFuntion', displayName: 'Sub Funtion', isSearchable: true,hide: false,type:'text'
     },
-    {
-      name: 'wing', displayName: 'Wing', isSearchable: true,hide: false,type:'text'
-    },
-    {
-      name: 'category', displayName: 'Category', isSearchable: true,hide: false,type:'text'
-    },
-    // {
-    //   name: 'category', type: 'dropdown', displayName: 'Category',
-    //   dropDownList: this.categoryList
-    // },
-    {
-      name: 'subCategory', displayName: 'Sub Category', isSearchable: true,hide: false,type:'text'
-    },
-    {
-      name: 'eqpt', displayName: 'EQPT', isSearchable: true,hide: false,type:'text'
-    },
+
     {
       name: 'remarks', displayName: 'Remarks', isSearchable: true,hide: true,type:'text'
     },
