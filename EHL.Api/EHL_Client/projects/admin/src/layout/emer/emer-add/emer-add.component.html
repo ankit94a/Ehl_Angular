@@ -21,17 +21,49 @@
         </mat-form-field>
       </div>
       <div class="col-md-4">
-        <mat-form-field>
+        <!-- <mat-form-field>
           <mat-label>{{'SubFunction' | translate}}</mat-label>
           <input formControlName="subFunction" type="text" matInput placeholder="{{'SubFunction' | translate}}" required />
           <mat-error *ngIf="emerForm.get('subFunction')?.touched && emerForm.get('subFunction')?.invalid">
             Sub Function number is required
           </mat-error>
+        </mat-form-field> -->
+        <mat-form-field appearance="fill">
+          <mat-label>SubFunction</mat-label>
+          <mat-select formControlName="subFunction" panelClass="custom-dropdown" placeholder="SubFunction" (selectionChange)="getSubFunctionField($event.value)">
+            <mat-option [value]="'Data summary'">Data summary</mat-option>
+            <mat-option [value]="'Instructions to user maintenance'">Instructions to user maintenance</mat-option>
+            <mat-option [value]="'Technical description'">Technical description</mat-option>
+            <mat-option [value]="'Light repairs'">Light repairs</mat-option>
+            <mat-option [value]="'Field and base repairs'">Field and base repairs</mat-option>
+            <mat-option [value]="'Scales'">Scales</mat-option>
+            <mat-option [value]="'Permissiole repair schedule'">Permissiole repair schedule</mat-option>
+            <mat-option [value]="'Modification instructions'">Modification instructions</mat-option>
+            <mat-option [value]="'Inspection std and condemnation limits'">Inspection std and condemnation limits</mat-option>
+            <mat-option [value]="'Misc instructions'">Misc instructions</mat-option>
+          </mat-select>
+          <mat-error *ngIf="emerForm.get('subFunction')?.touched && emerForm.get('subFunction')?.hasError('required')">
+            Sub Function is required
+          </mat-error>
         </mat-form-field>
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div
+        class="col-md-4"
+        *ngIf="subNarrowFunctionDropdown.length > 0">
+        <mat-form-field appearance="fill">
+          <mat-label>Sub Function Category</mat-label>
+          <mat-select [multiple]="false" formControlName="wingId" panelClass="custom-dropdown" placeholder="Sub Function Category">
+            <mat-option *ngFor="let sb of subNarrowFunctionDropdown" [value]="sb">
+              {{ sb }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div
+        [ngClass]="{'col-md-4': subNarrowFunctionDropdown.length > 0, 'col-md-6': subNarrowFunctionDropdown.length === 0}">
         <mat-form-field appearance="fill">
           <mat-label>Wing</mat-label>
           <mat-select [multiple]="false" formControlName="wingId" (selectionChange)="getCategory($event.value)" panelClass="custom-dropdown" placeholder="Wing">
@@ -43,8 +75,10 @@
             Wing is required
           </mat-error>
         </mat-form-field>
-    </div>
-      <div class="col-md-6">
+      </div>
+
+      <div
+        [ngClass]="{'col-md-4': subNarrowFunctionDropdown.length > 0, 'col-md-6': subNarrowFunctionDropdown.length === 0}">
         <mat-form-field appearance="fill">
           <mat-label>{{'Category'|translate}}</mat-label>
           <mat-select [multiple]="false" formControlName="categoryId" (selectionChange)="getSubCategory($event.value)"
@@ -59,6 +93,7 @@
         </mat-form-field>
       </div>
     </div>
+
     <div class="row">
       <div class="col-md-6">
         <mat-form-field appearance="fill">

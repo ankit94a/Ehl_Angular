@@ -37,12 +37,13 @@ namespace EHL.Common.Models
 		public string Name { get; set; }           // Name of the file
 		public string FileType { get; set; }       // File type/extension (e.g., pdf, docx)
 		public long Size { get; set; }             // Size of the file (in bytes)
-		public string CreatedBy { get; set; }      // User who created the record
-		public string UpdatedBy { get; set; }      // User who last updated the record
+		public int CreatedBy { get; set; }      // User who created the record
+		public int UpdatedBy { get; set; }      // User who last updated the record
 		public DateTime CreatedOn { get; set; }    // Creation timestamp
 		public DateTime UpdatedOn { get; set; }    // Update timestamp
 		public bool IsActive { get; set; }         // Active flag (true/false)
 		public bool IsDeleted { get; set; }        // Soft delete flag (true/false)
+		public string FilePath { get; set; }
 	}
 
 }

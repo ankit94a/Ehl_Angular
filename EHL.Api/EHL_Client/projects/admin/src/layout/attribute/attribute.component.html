@@ -52,7 +52,7 @@
               <div class="col-md-4">
                 <mat-form-field appearance="fill">
                   <mat-label>Wing</mat-label>
-                  <mat-select [multiple]="false" [(ngModel)]="wingId" panelClass="custom-dropdown" placeholder="Category">
+                  <mat-select [multiple]="false" [(ngModel)]="wingId" panelClass="custom-dropdown" placeholder="Category" (selectionChange)="getCategory($event.value)">
                     <mat-option *ngFor="let wing of wing" [value]="wing.id">
                       {{ wing.name }}
                     </mat-option>
@@ -100,7 +100,7 @@
               <div class="col-md-4">
                 <mat-form-field appearance="fill">
                   <mat-label>Wing</mat-label>
-                  <mat-select [multiple]="false" [(ngModel)]="wingId" panelClass="custom-dropdown" placeholder="Category">
+                  <mat-select [multiple]="false" [(ngModel)]="wingId" panelClass="custom-dropdown" placeholder="Category" (selectionChange)="getCategory($event.value)">
                     <mat-option *ngFor="let wing of wing" [value]="wing.id">
                       {{ wing.name }}
                     </mat-option>
@@ -110,7 +110,7 @@
               <div class="col-md-4">
                 <mat-form-field appearance="fill">
                   <mat-label>Category</mat-label>
-                  <mat-select [multiple]="false" [(ngModel)]="categoryId" panelClass="custom-dropdown" placeholder="Category">
+                  <mat-select [multiple]="false" [(ngModel)]="categoryId" panelClass="custom-dropdown" placeholder="Category" (selectionChange)="getSubCategory($event.value)">
                     <mat-option *ngFor="let category of categoryList" [value]="category.id">
                       {{ category.name }}
                     </mat-option>

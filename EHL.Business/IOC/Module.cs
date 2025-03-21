@@ -19,7 +19,9 @@ namespace EHL.Business.IOC
 				{typeof(IUserManager), typeof(UserManager) },
 				{typeof(ILandingPageManager), typeof(LandingPageManager) },
 				{typeof(IAttributeManager), typeof(AttributeManager) },
-				{typeof(IEmerManager), typeof(EmerManager) }
+				{typeof(IEmerManager), typeof(EmerManager) },
+				{typeof(IPolicyManger), typeof(PolicyManger) },
+				{typeof(IFileManager), typeof(FileManager) }
 			};
 			return dic;
 		}

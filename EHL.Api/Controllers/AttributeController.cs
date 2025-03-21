@@ -53,7 +53,7 @@ namespace EHL.Api.Controllers
 			return Ok(_attributeManager.AddEqpt(eqpt));
 		}
 		[HttpGet, Route("wing")]
-		public IActionResult GetCategory()
+		public IActionResult GetAllWings()
 		{
 			return Ok(_attributeManager.GetWing());
 		}

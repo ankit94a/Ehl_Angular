@@ -95,8 +95,8 @@ namespace EHL.DB.Implements
 				}
 
 				string query = @"
-            INSERT INTO documents (document, filetype, name, size, createdby, updatedby, createdon, updatedon, isactive, isdeleted)
-            VALUES (@document, @filetype, @name, @size, @createdby, @updatedby, @createdon, @updatedon, @isactive, @isdeleted);
+            INSERT INTO documents (document, filetype, name, size, createdby, updatedby, createdon, isactive, isdeleted)
+            VALUES (@document, @filetype, @name, @size, @createdby, @updatedby, @createdon, @isactive, @isdeleted);
             SELECT CAST(SCOPE_IDENTITY() AS BIGINT);";
 
 				// Use Dapper to execute the query and insert the file data into the database
@@ -109,7 +109,6 @@ namespace EHL.DB.Implements
 					document.CreatedBy,       // Created by user
 					document.UpdatedBy,       // Updated by user
 					CreatedOn = DateTime.Now, // Created on timestamp
-					UpdatedOn = DateTime.Now, // Updated on timestamp
 					IsActive = true,          // Active flag
 					IsDeleted = false         // Deleted flag
 				};

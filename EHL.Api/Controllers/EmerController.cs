@@ -20,30 +20,33 @@ namespace EHL.Api.Controllers
 			return Ok(_emmerManager.GetAllEmer());
 		}
 
-        [HttpPost]
-        public IActionResult AddEmer([FromForm] EmerModel emerModel)
-        {
-            emerModel.CreatedBy = HttpContext.GetUserId();
-            emerModel.CreatedOn = DateTime.Now;
-            emerModel.IsActive = true;
-            emerModel.IsDeleted = false;
+		[HttpPost]
+		public async Task<IActionResult> AddEmer([FromForm] EmerModel emerModel)
+		{
+			emerModel.CreatedBy = HttpContext.GetUserId();
+			emerModel.CreatedOn = DateTime.Now;
+			emerModel.IsActive = true;
+			emerModel.IsDeleted = false;
 
-            if (emerModel.EmerFile != null && emerModel.EmerFile.Length > 0)
-            {
-                using (var memoryStream = new MemoryStream())
-                {
-                    emerModel.EmerFile.CopyTo(memoryStream);
-                    emerModel.FileBytes = memoryStream.ToArray();  // Store file content as byte array
-                }
-            }
+			if (emerModel.EmerFile != null && emerModel.EmerFile.Length > 0)
+			{
+				using (var memoryStream = new MemoryStream())
+				{
+					await emerModel.EmerFile.CopyToAsync(memoryStream); // Use `await` for async file copying
+					emerModel.FileBytes = memoryStream.ToArray();  // Store file content as byte array
+				}
+			}
 
-            // Save to database
-            return Ok(_emmerManager.AddEmer(emerModel));
-        }
+			// Save to database asynchronously
+			var result = await _emmerManager.AddEmer(emerModel); // Ensure `AddEmerAsync` is an async method
+
+			return Ok(result);
+		}
 
 
 
-        [HttpPost, Route("update")]
+
+		[HttpPost, Route("update")]
 		public IActionResult UpdateEmer([FromBody] EmerModel emerModel)
 		{
 			emerModel.UpdatedBy = HttpContext.GetUserId();

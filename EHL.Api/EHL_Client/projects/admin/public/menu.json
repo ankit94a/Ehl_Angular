@@ -34,7 +34,15 @@
         "routerLink": "/confidential-emer",
         "permissionName": "ConfidentialEmer",
         "permissionAction": "ViewAll"
+      },
+      {
+        "text": "Index",
+        "icon": "fa-brands fa-creative-commons-nd",
+        "routerLink": "/index-emer",
+        "permissionName": "IndexEmer",
+        "permissionAction": "ViewAll"
       }
+
     ]
   },
   {

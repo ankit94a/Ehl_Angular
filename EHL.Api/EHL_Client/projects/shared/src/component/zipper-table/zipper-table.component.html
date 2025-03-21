@@ -61,7 +61,7 @@
                         <div *ngSwitchCase="'custom'">
                             <!-- <custom-view-component [column]="column" [element]="element"></custom-view-component> -->
                         </div>
-
+                        <a *ngSwitchCase="'link'" class="btn btn-link" (click)="sendFileRow(element)">{{getValues(element,column) }}</a>
                         <div *ngSwitchCase="'html'" [innerHtml]="getValues(element,column)"></div>
                         <div *ngSwitchDefault >{{getValues(element,column) }}</div>
                     </div>

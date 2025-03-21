@@ -42,7 +42,6 @@ export class AttributeComponent {
   }
 
  public async onTabChange(event) {
-    debugger
     const selectedTab = event.index;
     switch (selectedTab) {
       case 0:
@@ -101,7 +100,6 @@ export class AttributeComponent {
     })
   }
   getSubCategory(categoryId){
-    debugger;
     if(this.categoryList.length > 0 && categoryId == undefined){
       categoryId = this.categoryList[0].id;
     }

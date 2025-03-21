@@ -20,8 +20,11 @@ export class SidebarComponent implements OnInit {
   @Output() isloaded = new EventEmitter();
   roleType;
   constructor(private http: HttpClient,private authService:AuthService) {
+    this.http.get<any[]>('/menu.json').subscribe(data => {
+      this.sideBarMenus = data;
+    });
     this.roleType = this.authService.getRoleType();
-    this.filterSideBar()
+
   }
 
   ngOnInit() {
@@ -29,9 +32,7 @@ export class SidebarComponent implements OnInit {
   }
 
   filterSideBar(){
-    this.http.get<any[]>('/menu.json').subscribe(data => {
-      this.sideBarMenus = data;
-    });
+
   }
   public onSidenavClose = () => {
     this.sidenavClose.emit();

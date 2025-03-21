@@ -31,6 +31,8 @@ namespace EHL.Api
 			{
 				options.AddPolicy("_myAllowSpecificOrigins", builder =>
 				{
+					// http://localhost:4200
+					// https://ehlweb.jayceetechsoftwares.com
 					builder.WithOrigins("http://localhost:4200")
 						   .AllowAnyMethod()
 						   .AllowAnyHeader()

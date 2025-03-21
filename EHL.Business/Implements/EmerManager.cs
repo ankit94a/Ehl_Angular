@@ -21,42 +21,64 @@ namespace EHL.Business.Implements
 		{
 			return _emerDb.GetAllEmer();
 		}
-		public bool AddEmer(EmerModel emer)
+		public async Task<bool> AddEmer(EmerModel emer)
 		{
 			try
 			{
-				long fileId = 0; // Variable to store file ID
-
-				// Check if the file is provided
+				long fileId = 0;
 				if (emer.EmerFile != null && emer.EmerFile.Length > 0)
 				{
-					// Create a new document object to store the file data
+					// Define the directory path where the file will be saved
+					string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "emer");
+
+					// Ensure the directory exists
+					if (!Directory.Exists(uploadsFolder))
+					{
+						Directory.CreateDirectory(uploadsFolder);
+					}
+
+					// Generate a unique file name
+					string uniqueFileName = $"{Guid.NewGuid()}{Path.GetExtension(emer.EmerFile.FileName)}";
+					string fullFilePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+					Console.WriteLine($"Saving file to: {fullFilePath}"); // Debugging
+
+					// Save the file locally
+					using (var fileStream = new FileStream(fullFilePath, FileMode.Create, FileAccess.Write, FileShare.None))
+					{
+						await emer.EmerFile.CopyToAsync(fileStream);
+					}
+
+					// Store the relative path in DB
+					string relativeFilePath = Path.Combine("emer", uniqueFileName);
+
 					var doc = new Documents
 					{
-						Name = Path.GetFileName(emer.EmerFile.FileName), // Store file name
-						FileType = Path.GetExtension(emer.EmerFile.FileName), // Store file extension
-						Size = emer.EmerFile.Length, // Store file size
-						Document = ConvertToByteArray(emer.EmerFile) // Convert file to byte array
+						Name = Path.GetFileName(emer.EmerFile.FileName),
+						FileType = Path.GetExtension(emer.EmerFile.FileName),
+						Size = emer.EmerFile.Length,
+						FilePath = relativeFilePath,
+						CreatedBy = 1,
+						UpdatedBy = 1,
+						CreatedOn = DateTime.Now,
+						IsActive = true,
+						IsDeleted = false
 					};
 
-					// Add the file information to the database and get the file ID
+					// Store in database (ensure async method)
 					fileId = _emerDb.AddFile(doc);
 
-					if (fileId == null || fileId <= 0)
+					if (fileId <= 0)
 					{
 						throw new Exception("Failed to save the file.");
 					}
 				}
 
-				// Assign the file ID to the EmerModel
-				emer.FileId = fileId; // Assuming EmerModel has a FileId property
-
-				// Save the EmerModel information in the database
 				return _emerDb.AddEmer(emer);
 			}
 			catch (Exception ex)
 			{
-				// Log the error
+				Console.WriteLine($"Error: {ex.Message}");
 				throw new Exception("Error while adding the EmerModel data.", ex);
 			}
 		}

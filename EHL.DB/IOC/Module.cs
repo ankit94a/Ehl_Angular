@@ -18,7 +18,9 @@ namespace EHL.DB.IOC
 				{typeof(IUserDB), typeof(UserDB) },
 				{typeof(ILandingPageDB), typeof(LandingPageDB) },
 				{typeof(IAttributeDB), typeof(AttributeDB) },
-				{typeof(IEmerDB), typeof(EmerDB) }
+				{typeof(IEmerDB), typeof(EmerDB) },
+				{typeof(IPolicyDB), typeof(PolicyDB) },
+				{typeof(IFileDB), typeof(FileDB) }
 			};
 			return dic;
 		}
