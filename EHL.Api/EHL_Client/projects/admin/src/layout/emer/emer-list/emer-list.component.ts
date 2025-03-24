@@ -25,7 +25,7 @@ export class EmerListComponent extends TablePaginationSettingsConfig{
     this.tablePaginationSettings.enableAction = true;
     this.tablePaginationSettings.enableEdit = true;
     this.tablePaginationSettings.enableView = true;
-    // this.tablePaginationSettings.enableDelete = true;
+    this.tablePaginationSettings.enableDelete = true;
     this.tablePaginationSettings.enableColumn = true;
     this.tablePaginationSettings.pageSizeOptions = [50, 100];
     this.tablePaginationSettings.showFirstLastButtons = false
@@ -44,7 +44,8 @@ export class EmerListComponent extends TablePaginationSettingsConfig{
 
   }
   view(row){
-
+    row.isEdit = false;
+    this.dialoagService.open(EmerAddComponent,row)
   }
   openDialog(){
     this.dialoagService.open(EmerAddComponent,null).then(res =>{
