@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'projects/shared/src/service/api.service';
 import { Category, Wing } from 'projects/shared/src/models/attribute.model';
@@ -19,9 +19,24 @@ export class PolicyAddComponent {
   wingList: Wing[] = [];
   fileName: string | null = null;
   fileSizeFormatted: string | null = null;
-  constructor(private dialogRef:MatDialogRef<PolicyAddComponent>, private apiService: ApiService,private fb: FormBuilder,private toastr: ToastrService,private dailogRef: MatDialogRef<PolicyAddComponent>) {
+  constructor(@Inject(MAT_DIALOG_DATA) data,private dialogRef:MatDialogRef<PolicyAddComponent>, private apiService: ApiService,private fb: FormBuilder,private toastr: ToastrService,private dailogRef: MatDialogRef<PolicyAddComponent>) {
     this.getWings();
-    this.createForm();
+    if(data != null){
+      this.bindDataToForm(data)
+    }else{
+      this.createForm();
+    }
+
+  }
+  bindDataToForm(policyData){
+    this.getCategory(policyData.wingId)
+    this.policy = this.fb.group({
+      type: [{value: policyData.type,disabled:true}, [Validators.required]],
+      wingId: [{value:policyData.wingId,disabled:true}, [Validators.required]],
+      categoryId: [{value:policyData.categoryId,disabled:true}, [Validators.required]],
+      policyFile: [null, [Validators.required]],
+      remarks: [{value:policyData.remarks,disabled:true}],
+    });
   }
   createForm() {
     this.policy = this.fb.group({

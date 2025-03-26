@@ -19,7 +19,7 @@ namespace EHL.DB.Implements
 
 		public List<Policy> GetAllPolicyByWing(long wingId)
 		{
-			string query = string.Format(@"select * from policy where wingid = @wingid");
+			string query = string.Format(@"select * from policy where wingid = @wingid and isactive = 1");
 			return connection.Query<Policy>(query, new { wingid = wingId }).ToList();
 		}
 
@@ -29,10 +29,10 @@ namespace EHL.DB.Implements
 			return connection.Execute(query, policy) > 0;
 		}
 
-		public List<Policy> GetAdvisioriesByWing(long wingId, string type)
+		public List<Policy> GetAdvisioriesByWing(long wingId, string Type)
 		{
-			string query = string.Format(@"select * from policy where wingid = @wingid and type=@type");
-			return connection.Query<Policy>(query, new { wingid = wingId }).ToList();
+			string query = string.Format(@"select * from policy where wingid = @wingid and type=@type and isactive = 1");
+			return connection.Query<Policy>(query, new { wingid = wingId,type=Type }).ToList();
 		}
 	}
 }

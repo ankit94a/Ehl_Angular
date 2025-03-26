@@ -1,44 +1,44 @@
-import { ApiService } from './api.service';
 import { Injectable } from '@angular/core';
+import { ApiService } from './api.service';
+import { DownloadModel } from '../models/download.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DownloadService {
 
-  constructor(private ApiService:ApiService) { }
+  constructor(private apiService: ApiService) { }
 
-  download(downloadModel: any, urlStr) {
+  download(downloadModel: DownloadModel) {
+    debugger
+    if (!downloadModel || !downloadModel.filePath) {
+      console.error("Invalid download model or missing file path.");
+      return;
+    }
 
-    this.ApiService.getWithHeaderToDownload(urlStr, downloadModel).subscribe((res: Blob) => {
+    this.apiService.postWithHeaderToDownload('file/download', downloadModel).subscribe((res: Blob) => {
+      if (!res || res.size === 0) {
+        console.error("Downloaded file is empty.");
+        return;
+      }
+      debugger
+      const blob = new Blob([res], { type: res.type });
+      const url = window.URL.createObjectURL(blob);
+      const linkElement = document.createElement('a');
+      linkElement.href = url;
 
-        var linkElement = document.createElement('a');
+      // Determine the file name
+      let fileName = downloadModel.name || "downloaded_file.pdf"; // Use provided name or default
 
-        linkElement.href = URL.createObjectURL(res);
+      linkElement.download = fileName;
+      document.body.appendChild(linkElement);
+      linkElement.click();
 
-       // linkElement.href = window.URL.createObjectURL(res);
-        if (downloadModel.attachmentUrl != undefined && downloadModel.attachmentUrl.length > 0) {
-           // linkElement.href = window.URL.createObjectURL(res);
-
-            linkElement.download = downloadModel.attachmentUrl[1];
-        }
-        else {
-            //linkElement.href = window.URL.createObjectURL(res);
-            if(downloadModel.fileType==='pdf')
-            {
-            linkElement.download = downloadModel.data.split(',')[1] + "_" + new Date().toLocaleDateString() + ".pdf";
-            }
-            else
-            {
-            linkElement.download = downloadModel.fileType + "_" + new Date().toLocaleDateString() + ".pdf";
-            }
-        }
-        var clickEvent = new MouseEvent("click", {
-            "view": window,
-            "bubbles": true,
-            "cancelable": false
-        });
-        linkElement.dispatchEvent(clickEvent);
+      // Cleanup
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(linkElement);
+    }, error => {
+      console.error("Error downloading file:", error);
     });
-}
+  }
 }

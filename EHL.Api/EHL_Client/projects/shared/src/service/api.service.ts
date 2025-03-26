@@ -23,24 +23,22 @@ export class ApiService {
       })
     );
   }
-  getWithHeaderToDownload(url: string, dataId: any): Observable<Blob> {
+  postWithHeaderToDownload(url: string, data: any): Observable<Blob> {
     const headers = new HttpHeaders({
       'Accept': 'application/octet-stream' // Ensures the backend returns binary data
     });
 
-    return this.http.get(`${this.baseUrl}${url}/${dataId}`,  {
+    return this.http.post(`${this.baseUrl}${url}`, data, {
       headers: headers,
-      responseType: 'blob' as 'json' // Ensures the response is correctly treated as a Blob
+      responseType: 'blob' // Correctly specify responseType as 'blob'
     }).pipe(
-      map((res: Blob) => res),
       catchError((error: any) => {
-        if (error.status === 401) {
-          return this.showError(error);
-        }
-        return this.showError(error);
+        console.error("Download error:", error);
+        return this.showError(error);;
       })
     );
   }
+
 
 
   postWithHeader(url: string, Data: any): Observable<any> {

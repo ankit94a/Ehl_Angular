@@ -1,0 +1,29 @@
+<mat-card>
+  <mat-card-header>Techincal Manuals List</mat-card-header>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-md-10"></div>
+      <div class="col-md-2">
+        <button class="btn btn-link" (click)="openDailog()">+ Add Techincal Manuals</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field appearance="fill">
+          <mat-label>Wing</mat-label>
+          <mat-select [multiple]="false" [(ngModel)]="policyType.wingId" panelClass="custom-dropdown" placeholder="Wing">
+            <mat-option *ngFor="let wing of wingList" [value]="wing.id">
+              {{ wing.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+
+</div>
+    <app-table *ngIf="manualList.length > 0" [rowData]="manualList" [tablePaginationSettings]="tablePaginationSettings"
+      [enableCheckbox]="true" [isRowBackgroundColor]="true" [isRefresh]="isRefresh" [allowMultiSelect]="true"
+      (edit)="edit($event)" (view)="view($event)" [sqColumnDefinition]="columns" (getFileId)="getFileId($event)"
+      >
+    </app-table>
+  </mat-card-content>
+</mat-card>

@@ -7,6 +7,8 @@ import { BISMatDialogService } from 'projects/shared/src/service/insync-mat-dial
 import { SharedLibraryModule } from 'projects/shared/src/shared-library.module';
 import { TablePaginationSettingsConfig } from 'projects/shared/src/component/zipper-table/table-settings.model';
 import { ZipperTableComponent } from 'projects/shared/src/component/zipper-table/zipper-table.component';
+import { DownloadModel } from 'projects/shared/src/models/download.model';
+import { DownloadService } from 'projects/shared/src/service/download.service';
 
 @Component({
   selector: 'app-policy-list',
@@ -21,7 +23,7 @@ export class PolicyListComponent extends TablePaginationSettingsConfig{
   wingList:Wing[]=[];
   filterModel:PolicyFilterModel = new PolicyFilterModel();
   isRefresh:boolean=false;
-  constructor(private dialogService:BISMatDialogService,private apiService:ApiService){
+  constructor(private dialogService:BISMatDialogService,private apiService:ApiService,private downloadService:DownloadService){
     super();
     this.tablePaginationSettings.enableAction = true;
     this.tablePaginationSettings.enableEdit = true;
@@ -32,11 +34,28 @@ export class PolicyListComponent extends TablePaginationSettingsConfig{
     this.tablePaginationSettings.showFirstLastButtons = false;
     this.getWings();
   }
-  getFileId($event){
-
+  getFileId($event) {
+    var download = new DownloadModel();
+    download.filePath = $event.filePath;
+    download.name = $event.fileName;
+    this.downloadService.download(download)
+//     if (!$event.filePath) {
+//       console.error("File path is undefined.");
+//       return;
+//     }
+// debugger
+//     const encodedPath = encodeURIComponent($event.filePath);
+//     this.apiService.postWithHeader(`file/download`,download).subscribe(res => {
+//       if (res) {
+//         debugger
+//         console.log("File downloaded successfully.");
+//       }
+//     });
   }
-  view(row){
 
+  view(row){
+    row.isEdit = false;
+    this.dialogService.open(PolicyAddComponent,row)
   }
   edit(row){
 
@@ -78,8 +97,8 @@ export class PolicyListComponent extends TablePaginationSettingsConfig{
   }
   columns = [
     {
-      name: 'fileName', displayName: 'File', isSearchable: false,hide: false,valueType:'link',valuePrepareFunction:(row) =>{
-        return row.fileName + " | Size =  " +this.getReadableFileSize(row.fileSize)
+      name: 'fileName', displayName: 'File Name', isSearchable: true,hide: false,valueType:'link',valuePrepareFunction:(row) =>{
+        return row.fileName
       }
     },
     {

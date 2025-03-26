@@ -63,7 +63,7 @@ namespace EHL.Business.Implements
 		}
 		public List<Policy> GetAllPolicyByWing(long wingId)
 		{
-			return _policyDB.GetAllPolicyByWing(wingId);
+			return  _policyDB.GetAllPolicyByWing(wingId);
 		}
 		public List<Policy> GetAdvisioriesByWing(long wingId, string type)
 		{

@@ -56,7 +56,8 @@ export class EmerListComponent extends TablePaginationSettingsConfig{
   }
 
   getFileId(row: any) {
-    var result = this.downloadService.download(row.fileId,'file/download')
+    debugger
+    // var result = this.downloadService.download(row.filePath,'file/download')
     // this.apiService.getWithHeaders(`file/download/${row.fileId}`).subscribe(response => {
     //   debugger
     //   if (response) {
