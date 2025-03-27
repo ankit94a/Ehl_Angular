@@ -6,10 +6,11 @@
 
 .column-header-content{
     text-align: justify !important;
+    width: 100%;
 }
 .example-container {
     // height:  100vh;
-    height: 76vh;
+    max-height: 76vh;
     overflow: auto;
   }
 

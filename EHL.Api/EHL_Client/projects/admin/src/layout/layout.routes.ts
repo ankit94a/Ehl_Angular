@@ -39,6 +39,17 @@ export const routes: Routes = [
               loadComponent: () => import('./policy/policy-list/policy-list.component').then(m => m.PolicyListComponent),
               canActivate: [AuthGuard],
             },
+            {
+              path: 'master-sheet',
+              loadComponent: () => import('./master-sheet/master-sheet.component').then(m => m.MasterSheetComponent),
+              canActivate: [AuthGuard],
+            },
+            {
+              path: 'technical-manuals',
+              loadComponent: () => import('./techincal-manuals/techincal-manuals.component').then(m => m.TechincalManualsComponent),
+              canActivate: [AuthGuard],
+            },
+
       ]
   }
 ]

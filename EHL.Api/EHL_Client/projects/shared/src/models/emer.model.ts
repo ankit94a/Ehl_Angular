@@ -11,3 +11,15 @@ export class EmerModel extends BaseModel {
   MetaInformation: string;
   FileId: number
 }
+
+export class MasterSheetModel extends BaseModel {
+  wing:string;
+  wingId:number;
+  category:string;
+  categoryId:number;
+  subCategory:string;
+  subCategoryId:number;
+  eqpt:string;
+  eqptId:number;
+  emerNumber:string;
+}

@@ -4,7 +4,7 @@
   justify-content: center;
   background: linear-gradient(60deg, rgb(139, 0, 0),rgb(255, 99, 71));
   color: #fff;
-  height: 50px;
+  min-height: 43px;
   p{
     margin: 0 !important;
   }

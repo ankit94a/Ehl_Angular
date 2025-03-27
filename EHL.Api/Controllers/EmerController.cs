@@ -45,7 +45,6 @@ namespace EHL.Api.Controllers
 
 
 
-
 		[HttpPost, Route("update")]
 		public IActionResult UpdateEmer([FromBody] EmerModel emerModel)
 		{
