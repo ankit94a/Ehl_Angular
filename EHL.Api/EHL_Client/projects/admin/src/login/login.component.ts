@@ -38,8 +38,8 @@ export class LoginComponent {
         this.authService.setToken(res.token)
         this.authService.setUserDetails(res.user)
         this.dialog.closeAll();
-        this.languageService.setLanguage('en')
-        this.router.navigate(['/dashboard']);
+        // this.languageService.setLanguage('en')
+        this.router.navigate(['/wing']);
       }else {
         this.router.navigate(['/landing']);
       }

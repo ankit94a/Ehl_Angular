@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { SharedLibraryModule } from '../../../shared/src/shared-library.module';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
 import { HeaderComponent } from '../../../shared/src/component/header/header.component';
 import { SidebarComponent } from '../../../shared/src/component/sidebar/sidebar.component';
 import { FooterComponent } from '../../../shared/src/component/footer/footer.component';
@@ -23,7 +23,13 @@ export class LayoutComponent {
   sideBarOpen = true;
   isSideBarLoaded:boolean=false;
   typeSelected;
-  constructor() {
+  constructor(private router:Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        // Hide sidebar on wing-list page
+        this.sideBarOpen = event.url !== '/wing';
+      }
+    });
     this.typeSelected= 'ball-fussion';
   }
 

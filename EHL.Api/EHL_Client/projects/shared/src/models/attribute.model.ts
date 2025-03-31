@@ -2,6 +2,8 @@ import { BaseModel } from "./base.model";
 
 export class Wing extends BaseModel{
   name:string;
+  description:string;
+  imageUrl:string;
 }
 export class Category extends Wing{
   wingId:number;

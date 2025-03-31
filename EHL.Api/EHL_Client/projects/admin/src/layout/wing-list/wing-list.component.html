@@ -1,0 +1,33 @@
+<div class="main">
+  <div class="card-container">
+
+    <!-- First Row (3 Cards) -->
+    <div class="row">
+      <div class="col-md-4" *ngFor="let wing of splitWings().firstRow">
+        <div class="card">
+          <img [src]="wing.img" alt="Card Image">
+          <div class="card-content">
+            <h3>{{ wing.name }}</h3>
+            <p>{{ wing.description }}</p>
+            <button (click)="setWingData(wing)">Learn More</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Second Row (2 Cards) -->
+    <div class="row">
+      <div class="col-md-4" *ngFor="let wing of splitWings().secondRow">
+        <div class="card" >
+          <img [src]="wing.img" alt="Card Image">
+          <div class="card-content">
+            <h3>{{ wing.name }}</h3>
+            <p>{{ wing.description }}</p>
+            <button (click)="setWingData(wing)">Learn More</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

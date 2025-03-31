@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { TablePaginationSettingsConfig } from 'projects/shared/src/component/zipper-table/table-settings.model';
 import { ZipperTableComponent } from 'projects/shared/src/component/zipper-table/zipper-table.component';
-import { Wing } from 'projects/shared/src/models/attribute.model';
+import { Category, Wing } from 'projects/shared/src/models/attribute.model';
 import { Policy } from 'projects/shared/src/models/policy&misc.model';
 import { ApiService } from 'projects/shared/src/service/api.service';
+import { AuthService } from 'projects/shared/src/service/auth.service';
 import { SharedLibraryModule } from 'projects/shared/src/shared-library.module';
 
 @Component({
@@ -18,7 +19,8 @@ export class TechincalManualsComponent extends TablePaginationSettingsConfig{
   policyType = new Policy();
   isRefresh:boolean=false;
   wingList:Wing[]=[];
-  constructor(private apiService:ApiService){
+  categoryList:Category[]=[];
+  constructor(private apiService:ApiService,private authService:AuthService){
     super();
     this.tablePaginationSettings.enableAction = true;
     this.tablePaginationSettings.enableEdit = true;
@@ -27,7 +29,17 @@ export class TechincalManualsComponent extends TablePaginationSettingsConfig{
     this.tablePaginationSettings.enableColumn = true;
     this.tablePaginationSettings.pageSizeOptions = [50, 100];
     this.tablePaginationSettings.showFirstLastButtons = false;
-    this.getWings();
+    // this.getWings();
+    this.policyType.wingId = parseInt(this.authService.getWingId());
+    this.getAll();
+    this.getCategory()
+  }
+  getCategory(){
+    this.apiService.getWithHeaders('attribute/category'+this.policyType.wingId).subscribe(res =>{
+      if(res){
+        this.categoryList=res;
+      }
+    })
   }
   getAll(){
 
@@ -41,9 +53,9 @@ export class TechincalManualsComponent extends TablePaginationSettingsConfig{
   getWings(){
     this.apiService.getWithHeaders('attribute/wing').subscribe(res =>{
       if(res){
-        this.wingList=res;
-        this.policyType.wingId = this.wingList[0].id
-        this.getAll();
+        // this.wingList=res;
+        // this.policyType.wingId = this.wingList[0].id
+        // this.getAll();
       }
     })
   }
@@ -61,12 +73,9 @@ export class TechincalManualsComponent extends TablePaginationSettingsConfig{
   }
   columns = [
     {
-      name: 'fileName', displayName: 'File Name', isSearchable: false,hide: false,valueType:'link',valuePrepareFunction:(row) =>{
+      name: 'fileName', displayName: 'File Name', isSearchable: true,hide: false,valueType:'link',valuePrepareFunction:(row) =>{
         return row.fileName
       }
-    },
-    {
-      name: 'wing', displayName: 'Wing', isSearchable: true,hide: false,type:'text'
     },
     {
       name: 'category', displayName: 'Category', isSearchable: true,hide: false,type:'text'
