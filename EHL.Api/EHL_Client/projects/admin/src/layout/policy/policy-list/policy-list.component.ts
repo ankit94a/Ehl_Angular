@@ -39,18 +39,6 @@ export class PolicyListComponent extends TablePaginationSettingsConfig{
     download.filePath = $event.filePath;
     download.name = $event.fileName;
     this.downloadService.download(download)
-//     if (!$event.filePath) {
-//       console.error("File path is undefined.");
-//       return;
-//     }
-// debugger
-//     const encodedPath = encodeURIComponent($event.filePath);
-//     this.apiService.postWithHeader(`file/download`,download).subscribe(res => {
-//       if (res) {
-//         debugger
-//         console.log("File downloaded successfully.");
-//       }
-//     });
   }
 
   view(row){

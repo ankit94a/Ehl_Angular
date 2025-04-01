@@ -8,13 +8,6 @@
     "permissionAction": "ViewAll"
   },
   {
-    "text": "Technical Manuals",
-    "icon": "fa-solid fa-bars-progress",
-    "routerLink": "/technical-manuals",
-    "permissionName": "TechnicalManuals",
-    "permissionAction": "ViewAll"
-  },
-  {
     "text": "EMER",
     "icon": "fa-solid fa-hammer",
     "routerLink": "/emer",
@@ -45,6 +38,14 @@
 
     ]
   },
+  {
+    "text": "Technical Manuals",
+    "icon": "fa-solid fa-bars-progress",
+    "routerLink": "/technical-manuals",
+    "permissionName": "TechnicalManuals",
+    "permissionAction": "ViewAll"
+  },
+
   {
     "text": "Policy",
     "icon": "fa-solid fa-calendar",

@@ -58,8 +58,10 @@ export class AuthService {
   getWingId(){
     return localStorage.getItem("Wing_Id");
   }
-  removeWingDetails(){
+  clearWing() {
+    this.wingSubject.next(null);
     localStorage.removeItem("Wing_Name");
     localStorage.removeItem("Wing_Id");
   }
+
 }

@@ -21,7 +21,7 @@ namespace EHL.DB.Implements
 		{
 			try
 			{
-				string query = string.Format(@"select e.*,d.name as filename,d.size as filesize from emer e left join documents d on e.fileid = d.id   where e.isactive = 1");
+				string query = string.Format(@"select * from emer  where isactive = 1");
 				var result = connection.Query<EmerModel>(query).ToList();
 				return result;
 			}

@@ -36,6 +36,7 @@ export class EmerListComponent extends TablePaginationSettingsConfig{
   getList(){
     this.apiService.getWithHeaders("emer").subscribe(res =>{
       if(res){
+        console.log(res)
         this.emerList = res;
       }
     })

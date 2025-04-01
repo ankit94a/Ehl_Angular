@@ -5,11 +5,12 @@
     <div class="row">
       <div class="col-md-4" *ngFor="let wing of splitWings().firstRow">
         <div class="card">
-          <img [src]="wing.img" alt="Card Image">
+          <img [src]="wing.imageUrl" alt="Card Image">
+          <!-- <img src="automative_eng_wing.png" alt="Card Image"> -->
           <div class="card-content">
             <h3>{{ wing.name }}</h3>
             <p>{{ wing.description }}</p>
-            <button (click)="setWingData(wing)">Learn More</button>
+            <button (click)="setWingData(wing)">View</button>
           </div>
         </div>
       </div>
@@ -19,11 +20,11 @@
     <div class="row">
       <div class="col-md-4" *ngFor="let wing of splitWings().secondRow">
         <div class="card" >
-          <img [src]="wing.img" alt="Card Image">
+          <img [src]="wing.imageUrl" alt="Card Image">
           <div class="card-content">
             <h3>{{ wing.name }}</h3>
             <p>{{ wing.description }}</p>
-            <button (click)="setWingData(wing)">Learn More</button>
+            <button (click)="setWingData(wing)">View</button>
           </div>
         </div>
       </div>
