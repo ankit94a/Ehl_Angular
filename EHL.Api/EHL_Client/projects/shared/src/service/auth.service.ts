@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
+  private wingSubject = new BehaviorSubject<string | null>(null);
+  wing$ = this.wingSubject.asObservable();
   constructor(private router:Router) { }
 
   isAuthenticated(): boolean {
@@ -42,5 +44,22 @@ export class AuthService {
   }
   public navigateToLogin(stateUrl) {
     this.router.navigate(['/landing'], { queryParams: { 1: { returnUrl: stateUrl } } });
+  }
+  setWingDetails(wing){
+    localStorage.setItem("Wing_Name",wing.name);
+    this.wingSubject.next(wing.name);
+    localStorage.setItem("Wing_Id",wing.id);
+  }
+  getWingName(){
+    if(localStorage.getItem("Wing_Name"))
+      this.wingSubject.next(localStorage.getItem("Wing_Name"))
+    return this.wingSubject.getValue();
+  }
+  getWingId(){
+    return localStorage.getItem("Wing_Id");
+  }
+  removeWingDetails(){
+    localStorage.removeItem("Wing_Name");
+    localStorage.removeItem("Wing_Id");
   }
 }

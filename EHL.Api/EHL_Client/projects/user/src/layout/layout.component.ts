@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { FooterComponent } from 'projects/shared/src/component/footer/footer.component';
 import { HeaderComponent } from 'projects/shared/src/component/header/header.component';
 import { SidebarComponent } from 'projects/shared/src/component/sidebar/sidebar.component';
@@ -17,6 +17,7 @@ export class LayoutComponent {
   isSideBarLoaded:boolean=false;
   typeSelected;
   constructor() {
+
     this.typeSelected= 'ball-fussion';
   }
 

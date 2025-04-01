@@ -6,7 +6,10 @@
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
-        <span class="example-spacer">
+        <span class="example-spacer"><div *ngIf="wing$ | async as wing">
+          <a routerLink="wing" class="btn-link">{{ wing }}</a>
+        </div>
+
         </span>
         <!-- <app-language style="height: 30px;display: inherit;"></app-language> -->
         <i class="fa-solid fa-user" (click)="openDialog()"></i>

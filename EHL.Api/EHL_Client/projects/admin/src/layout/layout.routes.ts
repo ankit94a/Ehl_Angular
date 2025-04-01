@@ -49,7 +49,11 @@ export const routes: Routes = [
               loadComponent: () => import('./techincal-manuals/techincal-manuals.component').then(m => m.TechincalManualsComponent),
               canActivate: [AuthGuard],
             },
-
+            {
+              path: 'wing',
+              loadComponent: () => import('./wing-list/wing-list.component').then(m => m.WingListComponent),
+              canActivate: [AuthGuard],
+            },
       ]
   }
 ]

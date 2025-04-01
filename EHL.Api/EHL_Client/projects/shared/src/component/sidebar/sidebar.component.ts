@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { SharedLibraryModule } from '../../shared-library.module';
 import { AuthService } from '../../service/auth.service';
 // import { SharedModule } from 'projects/shared/src/public-api';
@@ -20,6 +20,7 @@ export class SidebarComponent implements OnInit {
   @Output() isloaded = new EventEmitter();
   roleType;
   constructor(private http: HttpClient,private authService:AuthService) {
+
     this.http.get<any[]>('/menu.json').subscribe(data => {
       this.sideBarMenus = data;
     });

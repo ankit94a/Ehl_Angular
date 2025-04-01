@@ -5,19 +5,22 @@ import { AuthService } from '../../service/auth.service';
 import { LanguageComponent } from '../language/language.component';
 import { UserProfileComponent } from 'projects/admin/src/layout/user-profile/user-profile.component';
 import { BISMatDialogService } from '../../service/insync-mat-dialog.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   standalone:true,
-  imports:[SharedLibraryModule,RouterModule,LanguageComponent],
+  imports:[SharedLibraryModule,RouterModule],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
+  wing$: Observable<string | null>;
   @Output() toggleSideBarForMe: EventEmitter<any> = new EventEmitter();
 
-  constructor(private authService:AuthService,private dialogService:BISMatDialogService) { }
+  constructor(private authService:AuthService,private dialogService:BISMatDialogService) {
+    this.wing$ = this.authService.wing$;
+  }
 
   ngOnInit(): void {
 
@@ -31,9 +34,12 @@ export class HeaderComponent implements OnInit {
       );
     }, 300);
   }
-
+  removeWing(){
+    this.authService.removeWingDetails();
+  }
   onLoggedout() {
     this.authService.clear()
+    this.authService.removeWingDetails();
   }
   openDialog(){
     this.dialogService.open(UserProfileComponent,null,'75vw','75vh')
