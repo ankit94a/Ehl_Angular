@@ -22,6 +22,11 @@ export class WingListComponent {
     this.apiService.getWithHeaders('attribute/wing').subscribe(res =>{
       if(res){
         this.wingList = res;
+        this.wingList[0].imageUrl = 'automative_eng_wing.png';
+        this.wingList[1].imageUrl = 'militaryra.jpg';
+        this.wingList[2].imageUrl = 'machinery.avif';
+        this.wingList[3].imageUrl = 'helicopter.jpg';
+        this.wingList[4].imageUrl = 'misc.avif';
         console.log(this.wingList)
       }
     })

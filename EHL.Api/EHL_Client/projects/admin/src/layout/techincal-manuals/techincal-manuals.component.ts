@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { TablePaginationSettingsConfig } from 'projects/shared/src/component/zipper-table/table-settings.model';
 import { ZipperTableComponent } from 'projects/shared/src/component/zipper-table/zipper-table.component';
 import { Category, Wing } from 'projects/shared/src/models/attribute.model';
+import { DownloadModel } from 'projects/shared/src/models/download.model';
 import { Policy } from 'projects/shared/src/models/policy&misc.model';
 import { ApiService } from 'projects/shared/src/service/api.service';
 import { AuthService } from 'projects/shared/src/service/auth.service';
+import { DownloadService } from 'projects/shared/src/service/download.service';
 import { SharedLibraryModule } from 'projects/shared/src/shared-library.module';
 
 @Component({
@@ -20,11 +22,12 @@ export class TechincalManualsComponent extends TablePaginationSettingsConfig{
   isRefresh:boolean=false;
   wingList:Wing[]=[];
   categoryList:Category[]=[];
-  constructor(private apiService:ApiService,private authService:AuthService){
+  clonedList:Policy[]=[];
+  constructor(private apiService:ApiService,private authService:AuthService,private downloadService:DownloadService){
     super();
-    this.tablePaginationSettings.enableAction = true;
-    this.tablePaginationSettings.enableEdit = true;
-    this.tablePaginationSettings.enableView = true;
+    // this.tablePaginationSettings.enableAction = true;
+    // this.tablePaginationSettings.enableEdit = true;
+    // this.tablePaginationSettings.enableView = true;
     // this.tablePaginationSettings.enableDelete = true;
     this.tablePaginationSettings.enableColumn = true;
     this.tablePaginationSettings.pageSizeOptions = [50, 100];
@@ -47,9 +50,19 @@ export class TechincalManualsComponent extends TablePaginationSettingsConfig{
     this.apiService.postWithHeader('policy/type',this.policyType).subscribe(res =>{
       if(res){
         this.manualList = res;
+        this.clonedList = res;
+        console.log('m',this.manualList)
       }
     })
   }
+  filterCategory(categoryId: any) {
+    if (categoryId == null) {
+      this.manualList = [...this.clonedList];
+    } else {
+      this.manualList = this.clonedList.filter(item => item.categoryId === categoryId);
+    }
+  }
+
   getWings(){
     this.apiService.getWithHeaders('attribute/wing').subscribe(res =>{
       if(res){
@@ -68,17 +81,20 @@ export class TechincalManualsComponent extends TablePaginationSettingsConfig{
   view(row){
 
   }
-  getFileId($event){
-
-  }
+   getFileId($event) {
+      var download = new DownloadModel();
+      download.filePath = $event.filePath;
+      download.name = $event.fileName;
+      this.downloadService.download(download)
+    }
   columns = [
     {
-      name: 'fileName', displayName: 'File Name', isSearchable: true,hide: false,valueType:'link',valuePrepareFunction:(row) =>{
+      name: 'fileName', displayName: 'File Name', isSearchable: false,hide: false,valueType:'link',valuePrepareFunction:(row) =>{
         return row.fileName
       }
     },
     {
-      name: 'category', displayName: 'Category', isSearchable: true,hide: false,type:'text'
+      name: 'category', displayName: 'Category', isSearchable: false,hide: false,type:'text'
     }
   ]
 }

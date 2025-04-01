@@ -34,12 +34,13 @@ export class HeaderComponent implements OnInit {
       );
     }, 300);
   }
-  removeWing(){
-    this.authService.removeWingDetails();
+  removeWing() {
+    this.authService.clearWing();
   }
+
   onLoggedout() {
     this.authService.clear()
-    this.authService.removeWingDetails();
+    this.authService.clearWing();
   }
   openDialog(){
     this.dialogService.open(UserProfileComponent,null,'75vw','75vh')
