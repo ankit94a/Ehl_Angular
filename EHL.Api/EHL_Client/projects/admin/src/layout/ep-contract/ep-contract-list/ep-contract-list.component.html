@@ -1,0 +1,17 @@
+<mat-card>
+  <mat-card-content>
+    <div class="row">
+      <div class="col-md-10">EpContract List</div>
+      <div class="col-md-2">
+        <button class="btn btn-link" (click)="openDailog()">+ Add EpContract</button>
+      </div>
+    </div>
+
+
+    <app-table *ngIf="epContractList.length > 0" [rowData]="epContractList" [tablePaginationSettings]="tablePaginationSettings"
+      [enableCheckbox]="true" [isRowBackgroundColor]="true" [isRefresh]="isRefresh" [allowMultiSelect]="true"
+      (edit)="edit($event)" [sqColumnDefinition]="columns" (getFileId)="getFileId($event)" [tableMaxHeight]="'80vh'"
+      >
+    </app-table>
+  </mat-card-content>
+</mat-card>

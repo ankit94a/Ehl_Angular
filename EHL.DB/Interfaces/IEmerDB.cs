@@ -14,5 +14,6 @@ namespace EHL.DB.Interfaces
 		public bool UpdateEmer(EmerModel emer);
 		public bool DeactivateEmer(long Id);
 		public long AddFile(Documents document);
+		public List<EmerModel> GetAllMasterSheet();
 	}
 }

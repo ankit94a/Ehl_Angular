@@ -54,6 +54,11 @@ export const routes: Routes = [
               loadComponent: () => import('./wing-list/wing-list.component').then(m => m.WingListComponent),
               canActivate: [AuthGuard],
             },
+            {
+              path: 'ep-contract',
+              loadComponent: () => import('./ep-contract/ep-contract-list/ep-contract-list.component').then(m => m.EpContractListComponent),
+              canActivate: [AuthGuard],
+            },
       ]
   }
 ]

@@ -31,6 +31,20 @@ namespace EHL.DB.Implements
 			}
 
 		}
+		public List<EmerModel> GetAllMasterSheet()
+		{
+			try
+			{
+				string query = string.Format(@"select * from mastersheet  where isactive = 1");
+				var result = connection.Query<EmerModel>(query).ToList();
+				return result;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+
+		}
 		public bool AddEmer(EmerModel emer)
 		{
 			try

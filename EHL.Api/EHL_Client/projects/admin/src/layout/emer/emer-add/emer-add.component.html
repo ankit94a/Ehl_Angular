@@ -5,7 +5,8 @@
       <div class="col-md-4">
         <mat-form-field>
           <mat-label>{{'EMERNumber' | translate}}</mat-label>
-          <input formControlName="emerNumber" type="text" matInput placeholder="{{'EMERNumber' | translate}}" required />
+          <input formControlName="emerNumber" type="text" matInput placeholder="{{'EMERNumber' | translate}}"
+            required />
           <mat-error *ngIf="emerForm.get('emerNumber')?.touched && emerForm.get('emerNumber')?.invalid">
             EMER number is required
           </mat-error>
@@ -30,17 +31,20 @@
         </mat-form-field> -->
         <mat-form-field appearance="fill">
           <mat-label>SubFunction</mat-label>
-          <mat-select formControlName="subFunction" panelClass="custom-dropdown" placeholder="SubFunction" (selectionChange)="getSubFunctionField($event.value)">
-            <mat-option [value]="'Data summary'">Data summary</mat-option>
-            <mat-option [value]="'Instructions to user maintenance'">Instructions to user maintenance</mat-option>
-            <mat-option [value]="'Technical description'">Technical description</mat-option>
-            <mat-option [value]="'Light repairs'">Light repairs</mat-option>
-            <mat-option [value]="'Field and base repairs'">Field and base repairs</mat-option>
-            <mat-option [value]="'Scales'">Scales</mat-option>
-            <mat-option [value]="'Permissiole repair schedule'">Permissiole repair schedule</mat-option>
-            <mat-option [value]="'Modification instructions'">Modification instructions</mat-option>
-            <mat-option [value]="'Inspection std and condemnation limits'">Inspection std and condemnation limits</mat-option>
-            <mat-option [value]="'Misc instructions'">Misc instructions</mat-option>
+          <mat-select formControlName="subFunction" panelClass="custom-dropdown" placeholder="SubFunction"
+            (selectionChange)="getSubFunctionField($event.value)">
+            <mat-option [value]="'DATA SUMMARY'">DATA SUMMARY</mat-option>
+            <mat-option [value]="'INSTRUCTIONS TO USER MAINTENANCE'">INSTRUCTIONS TO USER MAINTENANCE</mat-option>
+            <mat-option [value]="'TECHNICAL DESCRIPTION'">TECHNICAL DESCRIPTION</mat-option>
+            <mat-option [value]="'LIGHT REPAIRS'">LIGHT REPAIRS</mat-option>
+            <mat-option [value]="'FIELD AND BASE REPAIRS'">FIELD AND BASE REPAIRS</mat-option>
+            <mat-option [value]="'SCALES'">SCALES</mat-option>
+            <mat-option [value]="'PERMISSIBLE REPAIR SCHEDULE'">PERMISSIBLE REPAIR SCHEDULE</mat-option>
+            <mat-option [value]="'MODIFICATION INSTRUCTIONS'">MODIFICATION INSTRUCTIONS</mat-option>
+            <mat-option [value]="'INSPECTION STD AND CONDEMNATION LIMITS'">INSPECTION STD AND CONDEMNATION
+              LIMITS</mat-option>
+            <mat-option [value]="'MISCELLANEOUS INSTRUCTIONS'">MISCELLANEOUS INSTRUCTIONS</mat-option>
+
           </mat-select>
           <mat-error *ngIf="emerForm.get('subFunction')?.touched && emerForm.get('subFunction')?.hasError('required')">
             Sub Function is required
@@ -49,12 +53,11 @@
       </div>
     </div>
     <div class="row">
-      <div
-        class="col-md-4"
-        *ngIf="subNarrowFunctionDropdown.length > 0">
+      <div class="col-md-4" *ngIf="subNarrowFunctionDropdown.length > 0">
         <mat-form-field appearance="fill">
           <mat-label>Sub Function Category</mat-label>
-          <mat-select [multiple]="false" formControlName="wingId" panelClass="custom-dropdown" placeholder="Sub Function Category">
+          <mat-select [multiple]="false" formControlName="wingId" panelClass="custom-dropdown"
+            placeholder="Sub Function Category">
             <mat-option *ngFor="let sb of subNarrowFunctionDropdown" [value]="sb">
               {{ sb }}
             </mat-option>
@@ -66,7 +69,8 @@
         [ngClass]="{'col-md-4': subNarrowFunctionDropdown.length > 0, 'col-md-6': subNarrowFunctionDropdown.length === 0}">
         <mat-form-field appearance="fill">
           <mat-label>Wing</mat-label>
-          <mat-select [multiple]="false" formControlName="wingId" (selectionChange)="getCategory($event.value)" panelClass="custom-dropdown" placeholder="Wing">
+          <mat-select [multiple]="false" formControlName="wingId" (selectionChange)="getCategory($event.value)"
+            panelClass="custom-dropdown" placeholder="Wing">
             <mat-option *ngFor="let wing of wing" [value]="wing.id">
               {{ wing.name }}
             </mat-option>
@@ -112,8 +116,8 @@
       <div class="col-md-6">
         <mat-form-field appearance="fill">
           <mat-label>{{'EQPT'|translate}}</mat-label>
-          <mat-select [multiple]="false" formControlName="eqpt" panelClass="custom-dropdown" placeholder="{{'EQPT'|translate}}"
-            required>
+          <mat-select [multiple]="false" formControlName="eqpt" panelClass="custom-dropdown"
+            placeholder="{{'EQPT'|translate}}" required>
             <mat-option *ngFor="let eqpt of eqptList" [value]="eqpt.name">
               {{ eqpt.name }}
             </mat-option>
@@ -135,21 +139,28 @@
     <div class="row">
       <div class="col-md-4">
         <button mat-raised-button type="button" (click)="fileInput.click()" class="input-btn">Select File</button>
-        <input #fileInput type="file" style="display:none" (change)="onFileSelected($event)" accept=".pdf, .doc, .docx, .xls, .xlsx" />
+        <input #fileInput type="file" style="display:none" (change)="onFileSelected($event)"
+          accept=".pdf, .doc, .docx, .xls, .xlsx" />
       </div>
       <br>
-      <!-- Display file name and file size -->
-      <div *ngIf="fileName && fileSizeFormatted">
-        <p><strong>File Name:</strong> {{ fileName }}</p>
-        <p><strong>File Size:</strong> {{ fileSizeFormatted }}</p>
+      <!-- Display file name, file size, and remove button -->
+      <div *ngIf="fileName && fileSizeFormatted" class="file-info">
+        <div class="file-details">
+          <p><strong>File Name:</strong> {{ fileName }}</p>
+          <p><strong>File Size:</strong> {{ fileSizeFormatted }}</p>
+        </div>
+        <button mat-icon-button class="remove-btn" (click)="removeFile()">
+          <img src="cross.png" alt="">
+        </button>
       </div>
     </div>
+
 
 
   </mat-dialog-content>
   <mat-dialog-actions>
     <button type="button" class="btn btn-sm btn-danger" (click)="reset()">Reset</button>
     <button type="button" class="btn btn-sm btn-warning" (click)="close()">Close</button>
-    <button type="submit" class="btn btn-sm btn-primary" >Save</button>
+    <button type="submit" class="btn btn-sm btn-primary">Save</button>
   </mat-dialog-actions>
 </form>

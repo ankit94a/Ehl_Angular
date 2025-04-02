@@ -1,1 +1,16 @@
-<p>master-sheet works!</p>
+<mat-card>
+  <mat-card-title>
+    <div class="row">
+      <div class="col-md-3">MasterSheet List</div>
+      <div class="col-md-7"></div>
+
+    </div>
+
+  </mat-card-title>
+  <mat-card-content>
+    <app-table *ngIf="masterSheetList.length > 0" [rowData]="masterSheetList" [tablePaginationSettings]="tablePaginationSettings"
+      [enableCheckbox]="true" [isRowBackgroundColor]="true" [isRefresh]="isRefresh" [allowMultiSelect]="true"
+       [sqColumnDefinition]="columns" [tableMaxHeight]="'80vh'">
+    </app-table>
+  </mat-card-content>
+</mat-card>

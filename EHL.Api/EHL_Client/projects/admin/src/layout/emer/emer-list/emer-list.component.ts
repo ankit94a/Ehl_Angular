@@ -24,7 +24,7 @@ export class EmerListComponent extends TablePaginationSettingsConfig{
     super();
     this.tablePaginationSettings.enableAction = true;
     this.tablePaginationSettings.enableEdit = true;
-    this.tablePaginationSettings.enableView = true;
+    // this.tablePaginationSettings.enableView = true;
     this.tablePaginationSettings.enableDelete = true;
     this.tablePaginationSettings.enableColumn = true;
     this.tablePaginationSettings.pageSizeOptions = [50, 100];
@@ -42,7 +42,8 @@ export class EmerListComponent extends TablePaginationSettingsConfig{
     })
   }
   edit(row){
-
+    row.isEdit = true;
+    this.dialoagService.open(EmerAddComponent,row)
   }
   view(row){
     row.isEdit = false;
@@ -113,7 +114,7 @@ export class EmerListComponent extends TablePaginationSettingsConfig{
       name: 'subject', displayName: 'Subject', isSearchable: true,hide: false,type:'text'
     },
     {
-      name: 'subFuntion', displayName: 'Sub Funtion', isSearchable: true,hide: false,type:'text'
+      name: 'subFunction', displayName: 'Sub Funtion', isSearchable: true,hide: false,type:'text'
     },
 
     {
