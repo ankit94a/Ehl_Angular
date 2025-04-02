@@ -9,9 +9,9 @@
           <mat-option [value]="'Technical Manuals'">Technical Manuals</mat-option>
           <mat-option [value]="'Policy'">Policy</mat-option>
           <mat-option [value]="'Advisories'">Advisories</mat-option>
-          <mat-option [value]="'EP Contract'">EP Contract</mat-option>
           <mat-option [value]="'ISPL'">ISPL</mat-option>
           <mat-option [value]="'Defect Report'">Defect Report</mat-option>
+          <mat-option [value]="'Misc'">Misc</mat-option>
         </mat-select>
         <mat-error *ngIf="policy.get('type')?.touched && policy.get('type')?.hasError('required')">
           Policy Letter & Misc Type is required

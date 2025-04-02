@@ -19,7 +19,11 @@ namespace EHL.Api.Controllers
 		{
 			return Ok(_emmerManager.GetAllEmer());
 		}
-
+		[HttpGet,Route("mastersheet")]
+		public IActionResult GetAllMasterSheet()
+		{
+			return Ok(_emmerManager.GetAllMasterSheet());
+		}
 		[HttpPost]
 		public async Task<IActionResult> AddEmer([FromForm] EmerModel emerModel)
 		{

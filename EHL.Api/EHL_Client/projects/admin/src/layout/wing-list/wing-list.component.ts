@@ -23,9 +23,9 @@ export class WingListComponent {
       if(res){
         this.wingList = res;
         this.wingList[0].imageUrl = 'automative_eng_wing.png';
-        this.wingList[1].imageUrl = 'militaryra.jpg';
+        this.wingList[1].imageUrl = 'militaryarya.png';
         this.wingList[2].imageUrl = 'machinery.avif';
-        this.wingList[3].imageUrl = 'helicopter.jpg';
+        this.wingList[3].imageUrl = 'helicopter-bg.png';
         this.wingList[4].imageUrl = 'misc.avif';
         console.log(this.wingList)
       }

@@ -13,5 +13,7 @@ namespace EHL.Business.Interfaces
 		public Task<bool> AddEmer(EmerModel emer);
 		public bool UpdateEmer(EmerModel emer);
 		public bool DeactivateEmer(long Id);
+
+		public List<EmerModel> GetAllMasterSheet();
 	}
 }

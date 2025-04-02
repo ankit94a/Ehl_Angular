@@ -51,6 +51,7 @@ export class EmerAddComponent {
     });
   }
   bindDataToForm(form) {
+    debugger
     this.emerForm = this.fb.group({
       emerNumber: [form.emerNumber, [Validators.required]],
       subject: [form.subject, [Validators.required]],
@@ -67,6 +68,7 @@ export class EmerAddComponent {
     });
     this.getCategory(form.wingId);
     this.getSubCategory(form.categoryId);
+    this.getEqpt(form.subCategoryId)
   }
 
   createForm() {
@@ -140,10 +142,21 @@ export class EmerAddComponent {
       } else {
         this.fileName = null;
         this.fileSizeFormatted = null;
-        alert(
-          'Invalid file type! Only PDF, Word, and Excel files are allowed.'
-        );
+        alert('Invalid file type! Only PDF, Word, and Excel files are allowed.');
       }
+    }
+  }
+
+  removeFile(): void {
+    this.fileName = null;
+    this.fileSizeFormatted = null;
+    this.emerForm.patchValue({
+      emerFile: null,
+    });
+    // Clear the file input as well
+    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = '';
     }
   }
 

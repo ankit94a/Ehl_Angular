@@ -30,7 +30,7 @@ import { FormsModule } from '@angular/forms';
   //     ]
 })
 export class ZipperTableComponent extends TablePaginationSettingsConfig implements OnInit, OnChanges {
-
+  @Input() tableMaxHeight='680px';
   @Input() isRowBackgroundColor:boolean = false;
   selectedRowIndex = -1;
 

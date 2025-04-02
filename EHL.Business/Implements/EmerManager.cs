@@ -21,6 +21,10 @@ namespace EHL.Business.Implements
 		{
 			return _emerDb.GetAllEmer();
 		}
+		public List<EmerModel> GetAllMasterSheet()
+		{
+			return _emerDb.GetAllMasterSheet();
+		}
 		public async Task<bool> AddEmer(EmerModel emer)
 		{
 			try
