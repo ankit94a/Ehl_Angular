@@ -11,7 +11,7 @@
       <div class="col-md-6">
         <mat-form-field appearance="fill">
           <mat-label>Category</mat-label>
-          <mat-select [multiple]="false" (selectionChange)="filterCategory($event.value)" [(ngModel)]="policyType.categoryId" panelClass="custom-dropdown" placeholder="Wing">
+          <mat-select [multiple]="false" (selectionChange)="filterCategory($event.value)" [(ngModel)]="policyType.categoryId" panelClass="custom-dropdown" placeholder="Category">
             <mat-option [value]="null">All</mat-option>
             <mat-option *ngFor="let category of categoryList" [value]="category.id">
               {{ category.name }}
