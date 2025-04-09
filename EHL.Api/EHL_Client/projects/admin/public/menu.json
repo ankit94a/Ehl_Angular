@@ -24,7 +24,7 @@
       {
         "text": "Confidential",
         "icon": "fa-brands fa-creative-commons-nd",
-        "routerLink": "/confidential-emer",
+        "routerLink": "/confidential",
         "permissionName": "ConfidentialEmer",
         "permissionAction": "ViewAll"
       },
@@ -39,32 +39,18 @@
     ]
   },
   {
-    "text": "Technical Manuals",
+    "text": "Tech Reference",
     "icon": "fa-solid fa-bars-progress",
-    "routerLink": "/technical-manuals",
-    "permissionName": "TechnicalManuals",
-    "permissionAction": "ViewAll"
-  },
-
-  {
-    "text": "Policy",
-    "icon": "fa-solid fa-calendar",
     "routerLink": "/policy",
     "permissionName": "Policy",
     "permissionAction": "ViewAll"
+
   },
   {
     "text": "Technical AO/AI",
     "icon": "fa-solid fa-newspaper",
     "routerLink": "/technical-ao/ai",
     "permissionName": "TechnicalAoAI",
-    "permissionAction": "ViewAll"
-  },
-  {
-    "text": "Advisories",
-    "icon": "fa-solid fa-cloud",
-    "routerLink": "/advisories",
-    "permissionName": "Advisories",
     "permissionAction": "ViewAll"
   },
   {
@@ -75,12 +61,13 @@
     "permissionAction": "ViewAll"
   },
   {
-    "text": "ISPL",
-    "icon": "fa-solid fa-shield-halved",
-    "routerLink": "/ispl",
-    "permissionName": "Ispl",
+    "text": "Misc",
+    "icon": "fa-solid fa-microchip",
+    "routerLink": "/misc",
+    "permissionName": "EpContract",
     "permissionAction": "ViewAll"
   },
+
   {
     "text": "MRLS Distr List",
     "icon": "fa-solid fa-bookmark",
@@ -96,71 +83,12 @@
     "permissionAction": "ViewAll"
   },
   {
-    "text": "Eqpt",
+    "text": "Eqpt Mgrs",
     "icon": "fa-brands fa-creative-commons-nd",
     "routerLink": "/eqpt-mgrs",
     "permissionName": "EqptMgrs",
-    "permissionAction": "ViewAll",
-    "children":[
-      {
-        "text": "Mgrs",
-        "icon": "fa-brands fa-creative-commons-nd",
-        "routerLink": "/eqpt-mgrs",
-        "permissionName": "EqptMgrs",
-        "permissionAction": "ViewAll"
-      },
-      {
-        "text": "Wiki",
-        "icon": "fa-brands fa-creative-commons-nd",
-        "routerLink": "/eqpt-wiki",
-        "permissionName": "EqptWiki",
-        "permissionAction": "ViewAll"
-      }
-    ]
-  },
-  {
-    "text": "Idea Innovation (Last)",
-    "icon": "fa-solid fa-lightbulb",
-    "routerLink": "/idea-innovation",
-    "permissionName": "IdeaInnovation",
     "permissionAction": "ViewAll"
-  },
-  {
-    "text": "FAQs",
-    "icon": "fa-brands fa-creative-commons-nd",
-    "routerLink": "/faqs",
-    "permissionName": "Faqs",
-    "permissionAction": "ViewAll"
-  },
-  {
-    "text": "Query",
-    "icon": "fa-solid fa-comment",
-    "routerLink": "/policy",
-    "permissionName": "Query",
-    "permissionAction": "ViewAll",
-    "children": [
-      {
-        "text": "Pending",
-        "icon": "fa-solid fa-file",
-        "routerLink": "/policy",
-        "permissionName": "QueryPending",
-        "permissionAction": "ViewAll"
-      },
-      {
-        "text": "Solved",
-        "icon": "fa-solid fa-file-contract",
-        "routerLink": "/policy",
-        "permissionName": "QuerySolved",
-        "permissionAction": "ViewAll"
-      }
-    ]
-  },
-  {
-    "text": "Master sheet of EMERs",
-    "icon": "fa-solid fa-file-spreadsheet",
-    "routerLink": "/master-sheet",
-    "permissionName": "MasterSheet",
-    "permissionAction": "ViewAll"
+
   },
   {
     "text": "Home Page",

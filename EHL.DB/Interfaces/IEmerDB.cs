@@ -9,7 +9,7 @@ namespace EHL.DB.Interfaces
 {
 	public interface IEmerDB
 	{
-		public List<EmerModel> GetAllEmer();
+		public List<EmerModel> GetAllEmer(long wingId);
 		public bool AddEmer(EmerModel emer);
 		public bool UpdateEmer(EmerModel emer);
 		public bool DeactivateEmer(long Id);

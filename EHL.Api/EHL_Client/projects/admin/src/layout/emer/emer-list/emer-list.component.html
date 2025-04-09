@@ -11,7 +11,7 @@
   </mat-card-title>
   <mat-card-content>
     <app-table *ngIf="emerList.length > 0" [rowData]="emerList" [tablePaginationSettings]="tablePaginationSettings"
-      [enableCheckbox]="true" [isRowBackgroundColor]="true" [isRefresh]="isRefresh" [allowMultiSelect]="true"
+      [enableCheckbox]="true" [isRowBackgroundColor]="true" [isRefresh]="isRefresh" [allowMultiSelect]="true" [tableMaxHeight]="'850px'"
       (edit)="edit($event)" (view)="view($event)" [sqColumnDefinition]="columns" (getFileId)="getFileId($event)"
       >
     </app-table>

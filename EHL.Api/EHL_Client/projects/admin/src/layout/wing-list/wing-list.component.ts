@@ -22,21 +22,20 @@ export class WingListComponent {
     this.apiService.getWithHeaders('attribute/wing').subscribe(res =>{
       if(res){
         this.wingList = res;
-        this.wingList[0].imageUrl = 'automative_eng_wing.png';
-        this.wingList[1].imageUrl = 'militaryarya.png';
-        this.wingList[2].imageUrl = 'machinery.avif';
-        this.wingList[3].imageUrl = 'helicopter-bg.png';
+        this.wingList[0].imageUrl = 'automative-wing.png';
+        this.wingList[1].imageUrl = 'electronic-wing.png';
+        this.wingList[2].imageUrl = 'machiner-wing.png';
+        this.wingList[3].imageUrl = 'aviation-wing.png';
         this.wingList[4].imageUrl = 'misc.avif';
-        console.log(this.wingList)
       }
     })
   }
-  splitWings(): { firstRow: any[], secondRow: any[] } {
-    return {
-      firstRow: this.wingList.slice(0, 3),
-      secondRow: this.wingList.slice(3, 5)
-    };
-  }
+  // splitWings(): { firstRow: any[], secondRow: any[] } {
+  //   return {
+  //     firstRow: this.wingList.slice(0, 3),
+  //     secondRow: this.wingList.slice(3, 5)
+  //   };
+  // }
   setWingData(wing){
     this.authService.setWingDetails(wing);
     this.router.navigate(['/dashboard']);

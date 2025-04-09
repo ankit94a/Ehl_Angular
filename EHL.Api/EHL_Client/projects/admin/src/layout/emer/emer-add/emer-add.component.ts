@@ -10,6 +10,7 @@ import {
 } from 'projects/shared/src/models/attribute.model';
 import { EmerModel } from 'projects/shared/src/models/emer.model';
 import { ApiService } from 'projects/shared/src/service/api.service';
+import { AuthService } from 'projects/shared/src/service/auth.service';
 import { SharedLibraryModule } from 'projects/shared/src/shared-library.module';
 
 @Component({
@@ -28,30 +29,27 @@ export class EmerAddComponent {
   fileSizeFormatted: string | null = null;
   wing: Wing[] = [];
   subNarrowFunctionDropdown = [];
-  constructor(
-    @Inject(MAT_DIALOG_DATA) data,
-    private apiService: ApiService,
-    private fb: FormBuilder,
-    private dialogRef: MatDialogRef<EmerAddComponent>,
-    private toastr: ToastrService
-  ) {
+  SubFunctionType = [];
+  wingId:number;
+  constructor(@Inject(MAT_DIALOG_DATA) data,private authService:AuthService,private apiService: ApiService,private fb: FormBuilder,private dialogRef: MatDialogRef<EmerAddComponent>,private toastr: ToastrService) {
+    this.wingId = parseInt(this.authService.getWingId())
     if (data) {
       this.bindDataToForm(data);
     } else {
       this.createForm();
     }
-
     this.getWing();
+
   }
   getWing() {
     this.apiService.getWithHeaders('attribute/wing').subscribe((res) => {
       if (res) {
         this.wing = res;
+        this.getCategory(this.wingId)
       }
     });
   }
   bindDataToForm(form) {
-    debugger
     this.emerForm = this.fb.group({
       emerNumber: [form.emerNumber, [Validators.required]],
       subject: [form.subject, [Validators.required]],
@@ -76,14 +74,16 @@ export class EmerAddComponent {
       emerNumber: ['', [Validators.required]],
       subject: ['', [Validators.required]],
       subFunction: ['', [Validators.required]],
-      wing: [''],
+      wing: ['',],
       category: [''],
       subCategory: [''],
-      wingId: ['', [Validators.required]],
+      wingId: [{ value: this.wingId, disabled: true }, [Validators.required]],
       categoryId: ['', [Validators.required]],
       subCategoryId: ['', [Validators.required]],
       eqpt: ['', [Validators.required]],
       emerFile: [null, [Validators.required]],
+      subFunctionCategory: ['',],
+      subFunctionType: ['',],
       remarks: [''],
     });
   }
@@ -161,41 +161,30 @@ export class EmerAddComponent {
   }
 
   save() {
+
     const formData = new FormData();
-    var wing = this.wing.find(
-      (item) => item.id == this.emerForm.get('wingId')?.value
-    ).name;
-    var category = this.categoryList.find(
-      (item) => item.id == this.emerForm.get('categoryId')?.value
-    ).name;
-    var subCategory = this.subCategoryList.find(
-      (item) => item.id == this.emerForm.get('subCategoryId')?.value
-    ).name;
+    var wing = this.wing.find((item) => item.id == this.emerForm.get('wingId')?.value).name;
+    var category = this.categoryList.find((item) => item.id == this.emerForm.get('categoryId')?.value).name;
+    var subCategory = this.subCategoryList.find((item) => item.id == this.emerForm.get('subCategoryId')?.value).name;
 
     formData.append('wing', wing);
     formData.append('category', category);
     formData.append('subCategory', subCategory);
     if (this.emerForm.valid) {
-      // Append regular form fields to FormData
       formData.append('emerNumber', this.emerForm.get('emerNumber')?.value);
       formData.append('subject', this.emerForm.get('subject')?.value);
       formData.append('subFunction', this.emerForm.get('subFunction')?.value);
       formData.append('wingId', this.emerForm.get('wingId')?.value);
       formData.append('categoryId', this.emerForm.get('categoryId')?.value);
-      formData.append(
-        'subCategoryId',
-        this.emerForm.get('subCategoryId')?.value
-      );
+      formData.append('subCategoryId',this.emerForm.get('subCategoryId')?.value);
+      formData.append('subFunctionCategory', this.emerForm.get('subFunctionCategory')?.value);
+      formData.append('subFunctionType', this.emerForm.get('subFunctionType')?.value);
       formData.append('eqpt', this.emerForm.get('eqpt')?.value);
       formData.append('remarks', this.emerForm.get('remarks')?.value);
-
-      // Append the file to FormData
       const fileInput = this.emerForm.get('emerFile')?.value;
       if (fileInput) {
-        formData.append('emerFile', fileInput, fileInput.name); // Append the file
+        formData.append('emerFile', fileInput, fileInput.name);
       }
-
-      // Make the POST request with FormData
       this.apiService.postWithHeader('emer', formData).subscribe({
         next: (res) => {
           this.toastr.success('Form submitted successfully', 'Success');
@@ -207,8 +196,24 @@ export class EmerAddComponent {
       });
     }
   }
+
+
+  getSubFunctionType(type){
+    if(type == "Initial stocking guides"){
+      this.SubFunctionType = [
+        'ISG1', 'ISG2'
+      ]
+    }else if(type == "maintenance scales"){
+      this.SubFunctionType = [
+        'MS1', 'MS2'
+      ]
+    }else{
+      this.SubFunctionType = [];
+    }
+  }
+
   getSubFunctionField(subFunction) {
-    if (subFunction == 'Scales') {
+    if (subFunction == 'SCALES') {
       this.subNarrowFunctionDropdown = [
         'Initial stocking guides and maintenance scales',
         'Initial stocking guides',
@@ -217,10 +222,13 @@ export class EmerAddComponent {
         'War maintenance scales',
         'Special maintenance tools',
       ];
-    } else if (subFunction == 'Inspection std and condemnation limits') {
+    } else if (subFunction == 'INSPECTION STD AND CONDEMNATION LIMITS') {
       this.subNarrowFunctionDropdown = ['Field Ins Stds', 'Base Insp Stds'];
     } else {
       this.subNarrowFunctionDropdown = [];
+      this.SubFunctionType = [];
+      this.emerForm.get('subFunctionType')?.setValue('');
+      this.emerForm.get('subFunctionCategory')?.setValue('');
     }
   }
   close() {

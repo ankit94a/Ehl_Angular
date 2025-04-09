@@ -59,6 +59,26 @@ export const routes: Routes = [
               loadComponent: () => import('./ep-contract/ep-contract-list/ep-contract-list.component').then(m => m.EpContractListComponent),
               canActivate: [AuthGuard],
             },
+            {
+              path: 'confidential',
+              loadComponent: () => import('./emer/emer-confidential/emer-confidential.component').then(m => m.EmerConfidentialComponent),
+              canActivate: [AuthGuard],
+            },
+            {
+              path: 'technical-ao/ai',
+              loadComponent: () => import('./techincal-ao-ai/techincal-ao-ai.component').then(m => m.TechincalAoAiComponent),
+              canActivate: [AuthGuard],
+            },
+            {
+              path: 'defect-report',
+              loadComponent: () => import('./defect-report/defect-report.component').then(m => m.DefectReportComponent),
+              canActivate: [AuthGuard],
+            },
+            {
+              path: 'misc',
+              loadComponent: () => import('./misc/misc.component').then(m => m.MiscComponent),
+              canActivate: [AuthGuard],
+            },
       ]
   }
 ]

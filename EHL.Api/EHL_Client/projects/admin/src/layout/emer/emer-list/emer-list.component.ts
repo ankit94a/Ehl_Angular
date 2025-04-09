@@ -8,6 +8,8 @@ import { ZipperTableComponent } from 'projects/shared/src/component/zipper-table
 import { Category } from 'projects/shared/src/models/attribute.model';
 import { EmerModel } from 'projects/shared/src/models/emer.model';
 import { DownloadService } from 'projects/shared/src/service/download.service';
+import { PolicyFilterModel } from 'projects/shared/src/models/policy&misc.model';
+import { AuthService } from 'projects/shared/src/service/auth.service';
 
 @Component({
   selector: 'app-emer-list',
@@ -19,8 +21,9 @@ import { DownloadService } from 'projects/shared/src/service/download.service';
 export class EmerListComponent extends TablePaginationSettingsConfig{
   emerList:EmerModel[]=[];
   isRefresh:boolean=false;
+   filterModel:PolicyFilterModel = new PolicyFilterModel();
     // categoryList:Category[]=[];
-  constructor(private dialoagService:BISMatDialogService,private apiService:ApiService,private downloadService:DownloadService){
+  constructor(private dialoagService:BISMatDialogService,private apiService:ApiService,private downloadService:DownloadService,private authService:AuthService){
     super();
     this.tablePaginationSettings.enableAction = true;
     this.tablePaginationSettings.enableEdit = true;
@@ -29,14 +32,13 @@ export class EmerListComponent extends TablePaginationSettingsConfig{
     this.tablePaginationSettings.enableColumn = true;
     this.tablePaginationSettings.pageSizeOptions = [50, 100];
     this.tablePaginationSettings.showFirstLastButtons = false
-
+    this.filterModel.wingId = parseInt(this.authService.getWingId())
     // this.getCategory()
     this.getList();
   }
   getList(){
-    this.apiService.getWithHeaders("emer").subscribe(res =>{
+    this.apiService.getWithHeaders('emer/wing/'+this.filterModel.wingId).subscribe(res =>{
       if(res){
-        console.log(res)
         this.emerList = res;
       }
     })
@@ -91,12 +93,9 @@ export class EmerListComponent extends TablePaginationSettingsConfig{
   }
   columns = [
     {
-      name: 'fileName', displayName: 'File', isSearchable: false,hide: false,valueType:'link',valuePrepareFunction:(row) =>{
-        return row.fileName + " | Size =  " +this.getReadableFileSize(row.fileSize)
+      name: 'fileName', displayName: 'File', isSearchable: true,hide: false,valueType:'link',valuePrepareFunction:(row) =>{
+        return row.fileName
       }
-    },
-    {
-      name: 'wing', displayName: 'Wing', isSearchable: true,hide: false,type:'text'
     },
     {
       name: 'category', displayName: 'Category', isSearchable: true,hide: false,type:'text'
@@ -116,7 +115,12 @@ export class EmerListComponent extends TablePaginationSettingsConfig{
     {
       name: 'subFunction', displayName: 'Sub Funtion', isSearchable: true,hide: false,type:'text'
     },
-
+    {
+      name: 'subFunctionCategory', displayName: 'Sub FunctionCategory', isSearchable: true,hide: true,type:'text'
+    },
+    {
+      name: 'subFunctionType', displayName: 'Sub FunctionType', isSearchable: true,hide: true,type:'text'
+    },
     {
       name: 'remarks', displayName: 'Remarks', isSearchable: true,hide: true,type:'text'
     },

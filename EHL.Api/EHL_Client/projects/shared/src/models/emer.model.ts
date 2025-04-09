@@ -8,8 +8,9 @@ export class EmerModel extends BaseModel {
   SubCategory: number;  // long in C# can be represented as number in TypeScript
   Eqpt: string;
   EmerFile: string;
-  MetaInformation: string;
-  FileId: number
+  Remarks: string;
+  subFunctionCategory:string;
+  subFunctionType:string;
 }
 
 export class MasterSheetModel extends BaseModel {

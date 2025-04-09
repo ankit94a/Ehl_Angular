@@ -1,15 +1,53 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chartist from 'chartist';
-
+import { BaseChartDirective } from 'ng2-charts/lib/base-chart.directive';
+import { ChartConfiguration, ChartData, ChartDataset, ChartOptions } from 'chart.js';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   standalone:true,
+  imports:[],
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
+  barChartType: ChartData<'bar'>;
   constructor() { }
+
+
+  barChartOptions = {
+    responsive: true,
+    plugins: {
+      legend: { display: true },
+      title: { display: true, text: 'Dummy Bar Chart' }
+    },
+    scales: {
+      x: {},
+      y: {
+        beginAtZero: true
+      }
+    }
+  };
+
+  barChartLabels = ['Red', 'Blue', 'Yellow', 'Green', 'Purple'];
+
+  barChartData = {
+    labels: this.barChartLabels,
+    datasets: [
+      {
+        label: 'Sample Values',
+        data: [12, 19, 3, 5, 2],
+        backgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          '#FFCE56',
+          '#4BC0C0',
+          '#9966FF'
+        ]
+      }
+    ]
+  };
+
+
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
       seq = 0;
