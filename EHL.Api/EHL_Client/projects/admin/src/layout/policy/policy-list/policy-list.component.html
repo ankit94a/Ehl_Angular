@@ -17,8 +17,6 @@
             <mat-option [value]="'Policy Compendium'">Policy</mat-option>
             <mat-option [value]="'Advisories'">Advisories</mat-option>
             <mat-option [value]="'ISPL'">ISPL</mat-option>
-            <mat-option [value]="'Defect Report'">Defect Report</mat-option>
-            <mat-option [value]="'Misc'">Misc</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -26,7 +24,7 @@
 
     <app-table *ngIf="policyList.length > 0" [rowData]="policyList" [tablePaginationSettings]="tablePaginationSettings"
       [enableCheckbox]="true" [isRowBackgroundColor]="true" [isRefresh]="isRefresh" [allowMultiSelect]="true"
-      (edit)="edit($event)" (view)="view($event)" [sqColumnDefinition]="columns" (getFileId)="getFileId($event)"
+      (edit)="edit($event)" (view)="view($event)" [sqColumnDefinition]="columns" (getFileId)="getFileId($event)" [tableMaxHeight]="'73vh'"
       >
     </app-table>
   </mat-card-content>

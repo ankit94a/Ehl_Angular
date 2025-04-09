@@ -17,12 +17,12 @@ namespace EHL.DB.Implements
 
 		}
 
-		public List<EmerModel> GetAllEmer()
+		public List<EmerModel> GetAllEmer(long wingId)
 		{
 			try
 			{
-				string query = string.Format(@"select * from emer  where isactive = 1");
-				var result = connection.Query<EmerModel>(query).ToList();
+				string query = string.Format(@"select * from emer  where wingid = @wingid and isactive = 1");
+				var result = connection.Query<EmerModel>(query, new { wingid = wingId }).ToList();
 				return result;
 			}
 			catch (Exception ex)
@@ -53,13 +53,11 @@ namespace EHL.DB.Implements
 				if (emer.CreatedOn == default)
 					emer.CreatedOn = DateTime.Now;
 
-				if (emer.UpdatedOn == default)
-					emer.UpdatedOn = DateTime.Now;
 
 				string query = @"insert into emer 
-                            (emernumber, subject, subfunction, category, subcategory, categoryid, subcategoryid, eqpt, remarks, fileid, createdby, createdon, isactive,wing,wingid)
+                            (emernumber, subject, subfunction, category, subcategory, categoryid, subcategoryid, eqpt, remarks, fileid, createdby, createdon, isactive,wing,wingid,subfunctioncategory,subfunctiontype,filename,filepath)
                           values 
-                            (@emernumber, @subject, @subfunction, @category, @subcategory, @categoryid, @subcategoryid, @eqpt, @remarks, @fileid, @createdby, @createdon, @isactive,@wing,@wingid)";
+                            (@emernumber, @subject, @subfunction, @category, @subcategory, @categoryid, @subcategoryid, @eqpt, @remarks, @fileid, @createdby, @createdon, @isactive,@wing,@wingid,@subfunctioncategory,@subfunctiontype,@filename,@filepath)";
 
 				var result = connection.Execute(query, emer);
 				return result > 0;

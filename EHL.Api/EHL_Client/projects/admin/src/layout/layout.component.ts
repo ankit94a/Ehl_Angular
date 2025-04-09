@@ -26,10 +26,10 @@ export class LayoutComponent {
   constructor(private router:Router) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        // Hide sidebar on wing-list page
-        this.sideBarOpen = event.url !== '/wing';
+        this.sideBarOpen = !(event.url === '/wing' || event.url === '/master-sheet');
       }
     });
+
     this.typeSelected= 'ball-fussion';
   }
 

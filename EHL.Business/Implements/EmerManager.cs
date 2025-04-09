@@ -17,9 +17,9 @@ namespace EHL.Business.Implements
 		{
 			_emerDb = emerDB;
 		}
-		public List<EmerModel> GetAllEmer()
+		public List<EmerModel> GetAllEmer(long wingId)
 		{
-			return _emerDb.GetAllEmer();
+			return _emerDb.GetAllEmer(wingId);
 		}
 		public List<EmerModel> GetAllMasterSheet()
 		{
@@ -29,52 +29,23 @@ namespace EHL.Business.Implements
 		{
 			try
 			{
-				long fileId = 0;
+
 				if (emer.EmerFile != null && emer.EmerFile.Length > 0)
 				{
-					// Define the directory path where the file will be saved
 					string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "emer");
-
+					string filePath = Path.Combine(uploadsFolder, emer.EmerFile.FileName);
 					// Ensure the directory exists
 					if (!Directory.Exists(uploadsFolder))
 					{
 						Directory.CreateDirectory(uploadsFolder);
 					}
 
-					// Generate a unique file name
-					string uniqueFileName = $"{Guid.NewGuid()}{Path.GetExtension(emer.EmerFile.FileName)}";
-					string fullFilePath = Path.Combine(uploadsFolder, uniqueFileName);
-
-					Console.WriteLine($"Saving file to: {fullFilePath}"); // Debugging
-
+					emer.FileName = emer.EmerFile.FileName;
+					emer.FilePath = emer.FileName;
 					// Save the file locally
-					using (var fileStream = new FileStream(fullFilePath, FileMode.Create, FileAccess.Write, FileShare.None))
+					using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
 					{
 						await emer.EmerFile.CopyToAsync(fileStream);
-					}
-
-					// Store the relative path in DB
-					string relativeFilePath = Path.Combine("emer", uniqueFileName);
-
-					var doc = new Documents
-					{
-						Name = Path.GetFileName(emer.EmerFile.FileName),
-						FileType = Path.GetExtension(emer.EmerFile.FileName),
-						Size = emer.EmerFile.Length,
-						FilePath = relativeFilePath,
-						CreatedBy = 1,
-						UpdatedBy = 1,
-						CreatedOn = DateTime.Now,
-						IsActive = true,
-						IsDeleted = false
-					};
-
-					// Store in database (ensure async method)
-					fileId = _emerDb.AddFile(doc);
-
-					if (fileId <= 0)
-					{
-						throw new Exception("Failed to save the file.");
 					}
 				}
 

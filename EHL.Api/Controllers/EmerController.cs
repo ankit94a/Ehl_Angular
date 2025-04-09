@@ -14,10 +14,10 @@ namespace EHL.Api.Controllers
 		{
 			_emmerManager = emmerManager;
 		}
-		[HttpGet]
-		public IActionResult GetAllEmer()
+		[HttpGet,Route("wing/{wingId}")]
+		public IActionResult GetAllEmer(long wingId)
 		{
-			return Ok(_emmerManager.GetAllEmer());
+			return Ok(_emmerManager.GetAllEmer(wingId));
 		}
 		[HttpGet,Route("mastersheet")]
 		public IActionResult GetAllMasterSheet()

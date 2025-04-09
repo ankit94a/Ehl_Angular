@@ -12,6 +12,8 @@ namespace EHL.Common.Models
 		public string EmerNumber { get; set; }
 		public string Subject { get; set; }
 		public string SubFunction { get; set; }
+		public string SubFunctionCategory { get; set; }
+		public string SubFunctionType { get; set; }
 		public long CategoryId { get; set; }
 		public long SubCategoryId { get; set; }
 		public string Category { get; set; }
@@ -24,6 +26,7 @@ namespace EHL.Common.Models
 
 		// Additional properties to store file details
 		public string FileName { get; set; }
+		public string FilePath { get; set; }
 		public long FileSize { get; set; }
 		public string Wing { get; set; }
 		public int WingId { get; set; }
