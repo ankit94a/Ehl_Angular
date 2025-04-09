@@ -20,7 +20,7 @@ export class LandingPageComponent {
  news: News;
   newsList: News[] = [];
    userProfile: LandingProfile = new LandingProfile();
-
+  latestEmer = []
   constructor(private apiService:ApiService,private http:HttpClient,private dialogService: BISMatDialogService,private route:ActivatedRoute){
 
 
@@ -29,7 +29,15 @@ export class LandingPageComponent {
   }
   ngOnInit() {
     this.getAllNews();
-    // this.getProfile();
+    this.getProfile();
+  }
+  getLatestEmer(){
+    this.apiService.getWithHeaders('emer/latest').subscribe(res => {
+      if (res) {
+        this.latestEmer = res;
+        console.log(this.latestEmer)
+      }
+    })
   }
   getAllNews() {
     this.apiService.getWithHeaders('landingpage/news').subscribe(res => {

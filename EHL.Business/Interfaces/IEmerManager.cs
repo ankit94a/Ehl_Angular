@@ -15,5 +15,6 @@ namespace EHL.Business.Interfaces
 		public bool DeactivateEmer(long Id);
 
 		public List<EmerModel> GetAllMasterSheet();
+		public List<EmerModel> GetLatestEmer();
 	}
 }

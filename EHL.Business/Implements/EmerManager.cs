@@ -25,6 +25,10 @@ namespace EHL.Business.Implements
 		{
 			return _emerDb.GetAllMasterSheet();
 		}
+		public List<EmerModel> GetLatestEmer()
+		{
+			return _emerDb.GetLatestEmer();
+		}
 		public async Task<bool> AddEmer(EmerModel emer)
 		{
 			try
