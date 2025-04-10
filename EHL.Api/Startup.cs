@@ -33,7 +33,7 @@ namespace EHL.Api
 				{
 					// http://localhost:4200
 					// https://ehlweb.jayceetechsoftwares.com
-					builder.WithOrigins("https://ehlweb.jayceetechsoftwares.com")
+					builder.WithOrigins("http://localhost:4200")
 						   .AllowAnyMethod()
 						   .AllowAnyHeader()
 						   .AllowCredentials();

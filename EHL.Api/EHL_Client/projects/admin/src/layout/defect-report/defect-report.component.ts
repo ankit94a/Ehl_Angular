@@ -19,10 +19,10 @@ export class DefectReportComponent extends TablePaginationSettingsConfig{
   isRefresh:boolean=false;
   constructor(private authService:AuthService,private apiService:ApiService){
     super();
-    // this.tablePaginationSettings.enableAction = true;
+    this.tablePaginationSettings.enableAction = true;
     this.tablePaginationSettings.enableEdit = true;
     // this.tablePaginationSettings.enableView = true;
-    // this.tablePaginationSettings.enableDelete = true;
+    this.tablePaginationSettings.enableDelete = true;
     this.tablePaginationSettings.enableColumn = true;
     this.tablePaginationSettings.pageSizeOptions = [50, 100];
     this.tablePaginationSettings.showFirstLastButtons = false;

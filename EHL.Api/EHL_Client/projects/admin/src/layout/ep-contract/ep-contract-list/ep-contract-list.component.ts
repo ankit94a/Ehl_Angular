@@ -21,8 +21,9 @@ export class EpContractListComponent extends TablePaginationSettingsConfig{
   isRefresh:boolean=false;
   constructor(private apiService:ApiService,private authService:AuthService,private dailogService:BISMatDialogService){
     super()
+    this.tablePaginationSettings.enableAction = true;
     this.tablePaginationSettings.enableEdit = true;
-    this.tablePaginationSettings.enableColumn = true;
+    this.tablePaginationSettings.enableDelete = true;
     this.tablePaginationSettings.pageSizeOptions = [50, 100];
     this.tablePaginationSettings.showFirstLastButtons = false;
     this.filterModel.wingId = parseInt(this.authService.getWingId())

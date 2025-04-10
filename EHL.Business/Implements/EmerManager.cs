@@ -29,6 +29,10 @@ namespace EHL.Business.Implements
 		{
 			return _emerDb.GetLatestEmer();
 		}
+		public List<EmerIndex> GetEmerIndex(int wingId)
+		{
+			return _emerDb.GetEmerIndex(wingId);
+		}
 		public async Task<bool> AddEmer(EmerModel emer)
 		{
 			try

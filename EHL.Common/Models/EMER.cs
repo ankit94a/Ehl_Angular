@@ -49,4 +49,15 @@ namespace EHL.Common.Models
 		public string FilePath { get; set; }
 	}
 
+	public class EmerIndex : Base
+	{
+		public string EmerNumber { get; set; }
+		public string Category { get; set; }
+		public string Wing { get; set; }
+		public int WingId { get; set; }
+		public int CategoryId { get; set; }
+		public string Subject { get; set; }
+		public string FileName { get; set; }
+		public string FilePath { get; set; }
+	}
 }

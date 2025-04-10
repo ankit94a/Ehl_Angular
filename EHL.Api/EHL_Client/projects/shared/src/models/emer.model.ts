@@ -24,3 +24,14 @@ export class MasterSheetModel extends BaseModel {
   eqptId:number;
   emerNumber:string;
 }
+
+export class EmerIndex extends BaseModel {
+  emerNumber:string;
+  wing:string;
+  wingId:number;
+  category:string;
+  categoryId:number;
+  subject:string;
+  fileName:string;
+  filePath:string;
+}
