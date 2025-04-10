@@ -38,10 +38,10 @@ export class BISMatDialogService {
     return dialogRef.afterClosed().toPromise();
   }
 
-  confirmDialog(): Observable<any> {
+  confirmDialog(row): Observable<any> {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       maxWidth: "400px",
-      data: this.confirmContent
+      data: row
     });
     return dialogRef.afterClosed();
   }

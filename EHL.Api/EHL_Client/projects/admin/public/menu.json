@@ -31,7 +31,7 @@
       {
         "text": "Index",
         "icon": "fa-brands fa-creative-commons-nd",
-        "routerLink": "/index-emer",
+        "routerLink": "/emer-index",
         "permissionName": "IndexEmer",
         "permissionAction": "ViewAll"
       }
@@ -60,15 +60,7 @@
     "permissionName": "EpContract",
     "permissionAction": "ViewAll"
   },
-  {
-    "text": "Misc",
-    "icon": "fa-solid fa-microchip",
-    "routerLink": "/misc",
-    "permissionName": "EpContract",
-    "permissionAction": "ViewAll"
-  },
-
-  {
+   {
     "text": "MRLS Distr List",
     "icon": "fa-solid fa-bookmark",
     "routerLink": "/mrls-distr-list",

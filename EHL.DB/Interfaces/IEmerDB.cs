@@ -16,5 +16,7 @@ namespace EHL.DB.Interfaces
 		public long AddFile(Documents document);
 		public List<EmerModel> GetAllMasterSheet();
 		public List<EmerModel> GetLatestEmer();
+		public List<EmerIndex> GetEmerIndex(int wingId);
+
 	}
 }

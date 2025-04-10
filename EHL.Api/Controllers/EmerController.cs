@@ -70,5 +70,10 @@ namespace EHL.Api.Controllers
 			emerModel.IsDeleted = true;
 			return Ok(_emmerManager.DeactivateEmer(emerModel.Id));
 		}
+		[HttpGet, Route("index/{wingId}")]
+		public IActionResult GetEmerIndex(int wingId)
+		{
+			return Ok(_emmerManager.GetEmerIndex(wingId));
+		}
 	}
 }

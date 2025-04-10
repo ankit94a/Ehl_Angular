@@ -79,6 +79,11 @@ export const routes: Routes = [
               loadComponent: () => import('./misc/misc.component').then(m => m.MiscComponent),
               canActivate: [AuthGuard],
             },
+            {
+              path: 'emer-index',
+              loadComponent: () => import('./emer/emer-index/emer-index.component').then(m => m.EmerIndexComponent),
+              canActivate: [AuthGuard],
+            },
       ]
   }
 ]

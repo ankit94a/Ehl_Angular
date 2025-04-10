@@ -59,6 +59,20 @@ namespace EHL.DB.Implements
 			}
 
 		}
+		public List<EmerIndex> GetEmerIndex(int wingId)
+		{
+			try
+			{
+				string query = string.Format(@"select * from emerindex where isactive=1 and wingid=@wingid;");
+				var result = connection.Query<EmerIndex>(query, new { wingid = wingId }).ToList();
+				return result;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+
+		}
 		public bool AddEmer(EmerModel emer)
 		{
 			try
