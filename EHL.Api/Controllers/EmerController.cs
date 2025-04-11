@@ -24,10 +24,15 @@ namespace EHL.Api.Controllers
 		{
 			return Ok(_emmerManager.GetAllMasterSheet());
 		}
-		[HttpGet, Route("latest")]
+		[HttpGet, Route("latest/emer")]
 		public IActionResult GetLatestEmer()
 		{
 			return Ok(_emmerManager.GetLatestEmer());
+		}
+		[HttpGet, Route("latest/policy")]
+		public IActionResult GetLatestTwoPoliciesPerType()
+		{
+			return Ok(_emmerManager.GetLatestTwoPoliciesPerType());
 		}
 		[HttpPost]
 		public async Task<IActionResult> AddEmer([FromForm] EmerModel emerModel)
