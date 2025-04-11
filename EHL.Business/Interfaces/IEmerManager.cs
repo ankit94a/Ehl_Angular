@@ -17,5 +17,6 @@ namespace EHL.Business.Interfaces
 		public List<EmerModel> GetAllMasterSheet();
 		public List<EmerModel> GetLatestEmer();
 		public List<EmerIndex> GetEmerIndex(int wingId);
+		public List<Policy> GetLatestTwoPoliciesPerType();
 	}
 }

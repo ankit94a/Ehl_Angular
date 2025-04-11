@@ -33,6 +33,10 @@ namespace EHL.Business.Implements
 		{
 			return _emerDb.GetEmerIndex(wingId);
 		}
+		public List<Policy> GetLatestTwoPoliciesPerType()
+		{
+			return _emerDb.GetLatestTwoPoliciesPerType();
+		}
 		public async Task<bool> AddEmer(EmerModel emer)
 		{
 			try

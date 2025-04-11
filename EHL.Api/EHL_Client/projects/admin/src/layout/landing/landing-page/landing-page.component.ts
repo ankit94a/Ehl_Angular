@@ -7,6 +7,8 @@ import { catchError, map, Observable } from 'rxjs';
 import { LoginComponent } from '../../../login/login.component';
 import { ActivatedRoute } from '@angular/router';
 import { LandingProfile, News } from 'projects/shared/src/models/news.model';
+import { Policy } from 'projects/shared/src/models/policy&misc.model';
+import { IpService } from 'projects/shared/src/service/ip.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -20,22 +22,35 @@ export class LandingPageComponent {
  news: News;
   newsList: News[] = [];
    userProfile: LandingProfile = new LandingProfile();
-  latestEmer = []
-  constructor(private apiService:ApiService,private http:HttpClient,private dialogService: BISMatDialogService,private route:ActivatedRoute){
-
-
+  latestEmer = [];
+  latestTechnicalReference:Policy[]=[];
+  ipAddress:string='';
+  constructor(private apiService:ApiService,private http:HttpClient,private dialogService: BISMatDialogService,private route:ActivatedRoute,private ipService:IpService){
     this.news = new News();
     this.newsList = [];
   }
   ngOnInit() {
     this.getAllNews();
     this.getProfile();
+    this.getLatestPolicy();
+    this.getLatestEmer();
+    this.ipService.getIpAddress().subscribe((res) => {
+      this.ipAddress = res.ip;
+    });
   }
   getLatestEmer(){
-    this.apiService.getWithHeaders('emer/latest').subscribe(res => {
+    this.apiService.getWithHeaders('emer/latest/emer').subscribe(res => {
       if (res) {
         this.latestEmer = res;
-        console.log(this.latestEmer)
+        console.log('emer',this.latestEmer)
+      }
+    })
+  }
+  getLatestPolicy(){
+    this.apiService.getWithHeaders('emer/latest/policy').subscribe(res => {
+      if (res) {
+        this.latestTechnicalReference = res;
+        console.log('policy',this.latestTechnicalReference)
       }
     })
   }

@@ -49,7 +49,7 @@ namespace EHL.DB.Implements
 		{
 			try
 			{
-				string query = string.Format(@"select * from emer where isactive=1 order by id desc limit 10;");
+				string query = string.Format(@"select * from emer where isactive=1 order by id desc OFFSET 10 ROWS FETCH NEXT 10 ROWS ONLY;");
 				var result = connection.Query<EmerModel>(query).ToList();
 				return result;
 			}
@@ -59,6 +59,33 @@ namespace EHL.DB.Implements
 			}
 
 		}
+		public List<Policy> GetLatestTwoPoliciesPerType()
+		{
+			try
+			{
+				string query = @"
+			WITH ranked_policies AS (
+				SELECT *, 
+					   ROW_NUMBER() OVER (PARTITION BY type ORDER BY id DESC) AS rn
+				FROM policy
+				WHERE type IN ('Technical Manuals', 'Policy Compendium', 'Advisories', 'ISPL', 'Misc','EP Contract')
+				AND isactive = 1
+			)
+			SELECT * 
+			FROM ranked_policies
+			WHERE rn <= 2
+			ORDER BY type, id DESC;
+		";
+
+				var result = connection.Query<Policy>(query).ToList();
+				return result;
+			}
+			catch (Exception ex)
+			{
+				throw;
+			}
+		}
+
 		public List<EmerIndex> GetEmerIndex(int wingId)
 		{
 			try
