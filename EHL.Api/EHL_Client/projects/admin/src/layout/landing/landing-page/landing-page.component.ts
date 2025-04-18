@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { LandingProfile, News } from 'projects/shared/src/models/news.model';
 import { Policy } from 'projects/shared/src/models/policy&misc.model';
 import { IpService } from 'projects/shared/src/service/ip.service';
+import { AuthService } from 'projects/shared/src/service/auth.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -25,9 +26,11 @@ export class LandingPageComponent {
   latestEmer = [];
   latestTechnicalReference:Policy[]=[];
   ipAddress:string='';
-  constructor(private apiService:ApiService,private http:HttpClient,private dialogService: BISMatDialogService,private route:ActivatedRoute,private ipService:IpService){
+
+  constructor(private authService:AuthService, private apiService:ApiService,private http:HttpClient,private dialogService: BISMatDialogService,private route:ActivatedRoute,private ipService:IpService){
     this.news = new News();
     this.newsList = [];
+
   }
   ngOnInit() {
     this.getAllNews();
@@ -42,7 +45,6 @@ export class LandingPageComponent {
     this.apiService.getWithHeaders('emer/latest/emer').subscribe(res => {
       if (res) {
         this.latestEmer = res;
-        console.log('emer',this.latestEmer)
       }
     })
   }
@@ -50,7 +52,6 @@ export class LandingPageComponent {
     this.apiService.getWithHeaders('emer/latest/policy').subscribe(res => {
       if (res) {
         this.latestTechnicalReference = res;
-        console.log('policy',this.latestTechnicalReference)
       }
     })
   }
@@ -69,7 +70,7 @@ export class LandingPageComponent {
     })
   }
   openDialog(){
-    this.dialogService.open(LoginComponent,null,'25vw','40vh');
+    this.dialogService.open(LoginComponent,null,'40vw','50vh');
   }
 
 }

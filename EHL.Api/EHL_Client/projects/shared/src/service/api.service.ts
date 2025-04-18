@@ -38,9 +38,6 @@ export class ApiService {
       })
     );
   }
-
-
-
   postWithHeader(url: string, Data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}` + url, Data).pipe(map(
       (res: any) => {

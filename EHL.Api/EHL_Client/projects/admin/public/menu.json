@@ -39,10 +39,11 @@
     ]
   },
   {
-    "text": "Tech Reference",
+
+    "text": "Tech Manuals/Publications",
     "icon": "fa-solid fa-bars-progress",
     "routerLink": "/policy",
-    "permissionName": "Policy",
+    "permissionName": "Technical Manuals",
     "permissionAction": "ViewAll"
 
   },
@@ -54,17 +55,32 @@
     "permissionAction": "ViewAll"
   },
   {
-    "text": "EP Contract",
+    "text": "Contracts",
     "icon": "fa-solid fa-truck-fast",
     "routerLink": "/ep-contract",
     "permissionName": "EpContract",
     "permissionAction": "ViewAll"
+
   },
-   {
+  {
     "text": "MRLS Distr List",
     "icon": "fa-solid fa-bookmark",
     "routerLink": "/mrls-distr-list",
     "permissionName": "MrlsDistrList",
+    "permissionAction": "ViewAll"
+  },
+  {
+    "text": "Policies",
+    "icon": "fa-solid fa-file-contract",
+    "routerLink": "/policySidebar",
+    "permissionName": "Policy Compendium",
+    "permissionAction": "ViewAll"
+  },
+  {
+    "text": "ISPL",
+    "icon": "fa-solid fa-bookmark",
+    "routerLink": "/ispl",
+    "permissionName": "ISPL",
     "permissionAction": "ViewAll"
   },
   {
@@ -90,7 +106,7 @@
     "permissionName": "HomePage",
     "permissionAction": "ViewAll"
   },
-   {
+  {
     "text": "Attribute",
     "icon": "fa-brands fa-creative-commons-nd",
     "routerLink": "/attribute",

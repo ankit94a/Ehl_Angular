@@ -2,9 +2,10 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'projects/shared/src/service/api.service';
-import { Category, Wing } from 'projects/shared/src/models/attribute.model';
+import { Category, Eqpt, SubCategory, Wing } from 'projects/shared/src/models/attribute.model';
 import { SharedLibraryModule } from 'projects/shared/src/shared-library.module';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'projects/shared/src/service/auth.service';
 
 @Component({
   selector: 'app-policy-add',
@@ -17,9 +18,13 @@ export class PolicyAddComponent {
   policy: FormGroup;
   categoryList: Category[] = [];
   wingList: Wing[] = [];
+  subCategoryList: SubCategory[] = [];
+    eqptList: Eqpt[] = [];
   fileName: string | null = null;
   fileSizeFormatted: string | null = null;
-  constructor(@Inject(MAT_DIALOG_DATA) data,private dialogRef:MatDialogRef<PolicyAddComponent>, private apiService: ApiService,private fb: FormBuilder,private toastr: ToastrService,private dailogRef: MatDialogRef<PolicyAddComponent>) {
+  wingId:number;
+  constructor(private authService:AuthService, @Inject(MAT_DIALOG_DATA) data,private dialogRef:MatDialogRef<PolicyAddComponent>, private apiService: ApiService,private fb: FormBuilder,private toastr: ToastrService,private dailogRef: MatDialogRef<PolicyAddComponent>) {
+    this.wingId = parseInt(this.authService.getWingId())
     this.getWings();
     if(data != null){
       this.bindDataToForm(data)
@@ -41,11 +46,30 @@ export class PolicyAddComponent {
   createForm() {
     this.policy = this.fb.group({
       type: ['', [Validators.required]],
-      wingId: ['', [Validators.required]],
+      wingId: [{ value: this.wingId, disabled: true }, [Validators.required]],
       categoryId: ['', [Validators.required]],
       policyFile: [null, [Validators.required]],
       remarks: [''],
     });
+  }
+  getSubCategory(categoryId) {
+    this.apiService
+      .getWithHeaders('attribute/subcategory' + categoryId)
+      .subscribe((res) => {
+        if (res) {
+          this.subCategoryList = res;
+        }
+      });
+  }
+  getEqpt(subCategoryId) {
+    let categoryId = this.policy.get('categoryId')?.value;
+    this.apiService
+      .getWithHeaders('attribute/eqpt' + categoryId + '/' + subCategoryId)
+      .subscribe((res) => {
+        if (res) {
+          this.eqptList = res;
+        }
+      });
   }
   save() {
     const formData = new FormData();
@@ -85,6 +109,7 @@ export class PolicyAddComponent {
     this.apiService.getWithHeaders('attribute/wing').subscribe((res) => {
       if (res) {
         this.wingList = res;
+        this.getCategory(this.wingId)
       }
     });
   }

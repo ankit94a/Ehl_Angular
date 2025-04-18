@@ -9,7 +9,7 @@ import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { authInterceptor } from 'projects/shared/src/service/auth-interceptor.service';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
+import { NgxSpinnerModule } from "ngx-spinner";
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (http: HttpClient) =>
   new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
@@ -29,6 +29,7 @@ export const appConfig: ApplicationConfig = {
         importProvidersFrom(MatNativeDateModule),
         importProvidersFrom(HttpClientModule),
         provideHttpClient(withInterceptors([authInterceptor])),
-        provideCharts(withDefaultRegisterables())
+        provideCharts(withDefaultRegisterables()),
+        importProvidersFrom(NgxSpinnerModule)
   ]
 };

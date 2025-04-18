@@ -1,3 +1,4 @@
+
 @use '../../../../button' as button;
 
 $red:#f44336;
@@ -97,18 +98,56 @@ nav button:hover {
 
 .carousel-inner {
   width: 100%;
-  // height: 350px;
+  height: 350px;
 }
 
 .carousel-item img {
   width: 100%; /* Ensures the image takes full width */
-  // height: 10%;
-  // object-fit: cover;
-  border-radius: 0.75rem;
+  height: 100%; /* Forces the image to take full height */
+  object-fit: cover; /* Ensures images properly fit without stretching */
+  border-radius: 0.75rem; /* Optional: Match box border radius */
+}
+// banner
+.banner-img {
+  width: 100%;
+  max-height: 600px; /* Adjust height for large screens */
+  object-fit: cover;
+  display: block;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
+@media (max-width: 1024px) {
+  .banner-img {
+    max-height: 400px;
+  }
+}
 
+@media (max-width: 768px) {
+  .banner-img {
+    max-height: 300px;
+  }
+}
 
+@media (max-width: 480px) {
+  .banner-img {
+    max-height: 200px;
+  }
+}
+
+//
+// Card Styling
+.card-content{
+  background-color:#f7e7ae;
+}
+
+.card-content img {
+  max-height: fit-content;
+  object-fit: cover; /* Crop image to fit */
+  min-height: 250px;
+  max-height: 300px;
+  padding: 10px;
+}
 .box-sm{
   display: flex;
   align-items: center;
@@ -181,6 +220,22 @@ nav button:hover {
   text-transform: uppercase;
 }
 
+// emi-misson article section
+.emi-header-article {
+  background: $background-color;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+  // border-radius: 5px;
+}
+.emi-content-article {
+  display: flex;
+  padding: 15px 10px;
+
+}
+////////////////// eme mission section /////////////////
 
 /* EME Mission Header */
 .emi-header {
@@ -193,39 +248,109 @@ nav button:hover {
   // border-radius: 5px;
 }
 
-/* EME Mission Content */
 .emi-content {
   display: flex;
-  // gap: 5px;
-  justify-content: space-between;
-  align-items: center;
+  padding: 15px 10px;
+
 }
 
-/* Image Styling */
-.emi-content img {
-  height: 450px;
+// /* Image Styling */
+.emi-content1 img {
+  // height: 300px;
+  width: 30%;
   object-fit: cover;
-  // border-radius: 5px;
 }
 
-/* Width Configuration */
-.section-1, .section-2 {
-  width: 25%;
+// /* Width Configuration */
+// // .section-1, .section-2 {
+// //   width: 25%;
+
+// // }
+// // .section-3 {
+// //   width: 50%;
+// // }
+// .emi-content2 {
+//   background-color: #e3e7e0;
+//   padding: 20px;
+//   border-left: 2px solid #e0e0e0;
+//   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+//   text-align: center; /* centers everything inside */
+//   justify-content: center;
+//   align-items: center;
+// }
+.emi-content1{
+  display: flex;
+  flex-direction: row; /* Default: mobile */
+  object-fit: cover;
+
 }
 
-.section-3 {
-  width: 50%;
+//  NEW CODE
+
+.box {
+  background-color: #f9f9f9;
+  border-radius: 8px;
 }
 
+.emi-header {
+  font-weight: bold;
+}
+
+// .contact-title {
+//   font-size: 1rem;
+//   margin-bottom: 10px;
+// }
+
+.contact-list p{
+  margin-bottom: 0px;
+}
+
+.news-header {
+  font-weight: bold;
+}
+
+.badge {
+  font-size: 0.7rem;
+  padding: 3px 6px;
+}
+.contact-columns {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.contact-col {
+  flex: 1;
+  min-width: 150px;
+}
+
+
+
+
+////////////////// Eme Mission Section /////////////////
 /* Responsive Design */
 @media (max-width: 768px) {
   .emi-content {
-    flex-direction: column;
+    flex-direction: row;
+    display: flex;
+
   }
-  .section-1, .section-2, .section-3 {
-    width: 100%; /* Stacks images on smaller screens */
+  .emi-content1 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 10px; /* Adds space between sections */
+  }
+
+  .section-1{
+    width: 30%; /* Stacks images on smaller screens */
+    flex:1;
+    object-fit: cover;
   }
 }
+
 
 .center{
   text-align: center;
@@ -238,5 +363,34 @@ nav button:hover {
   background-color: $background-color;
   color: #fff;
 }
-///////////////////////
 
+/* Title Styling */
+.contact-title {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+/* Contact Numbers Styling */
+.contact-list h6 {
+  margin: 6px 0;
+  font-size: 17px;
+  line-height: 1.4;
+  color: #444;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .emi-content2 {
+    border-left: none;
+    border-top: 2px solid #e0e0e0;
+    width: 100%;
+    padding: 15px;
+  }
+}
+
+/* Footer Styling */
+.landing-footer{
+  padding: 20px;
+}

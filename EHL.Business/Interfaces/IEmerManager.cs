@@ -11,12 +11,14 @@ namespace EHL.Business.Interfaces
 	{
 		public List<EmerModel> GetAllEmer(long wingId);
 		public Task<bool> AddEmer(EmerModel emer);
-		public bool UpdateEmer(EmerModel emer);
+		public Task<bool> UpdateEmer(EmerModel emer);
 		public bool DeactivateEmer(long Id);
 
 		public List<EmerModel> GetAllMasterSheet();
 		public List<EmerModel> GetLatestEmer();
-		public List<EmerIndex> GetEmerIndex(int wingId);
+        public Task<bool> AddEmerIndex(EmerIndex emer);
+        public Task<bool> UpdateEmerIndex(EmerIndex emer);
+        public List<EmerIndex> GetEmerIndex(int wingId);
 		public List<Policy> GetLatestTwoPoliciesPerType();
 	}
 }
