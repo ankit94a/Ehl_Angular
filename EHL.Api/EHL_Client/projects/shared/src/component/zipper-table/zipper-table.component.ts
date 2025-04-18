@@ -35,7 +35,6 @@ export class ZipperTableComponent extends TablePaginationSettingsConfig implemen
   selectedRowIndex = -1;
 
   @Input() isRefresh: boolean;
-
   /**
    * @description Column names for the table
    */
@@ -255,14 +254,14 @@ export class ZipperTableComponent extends TablePaginationSettingsConfig implemen
   }
 
   applyFilter(filterValue: string) {
-    debugger
+    // debugger
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
 
   async applyInsyncFilter(value: any, colName: any, type: any) {
-    debugger
+    // debugger
     this.dataSource.data
     this.rowData
      if (type == "date") {

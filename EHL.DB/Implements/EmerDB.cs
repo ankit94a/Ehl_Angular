@@ -124,34 +124,100 @@ namespace EHL.DB.Implements
 			}
 		}
 
-		public bool UpdateEmer(EmerModel emer)
-		{
-			try
-			{
-				string query = string.Format(@"update emer set emernumber=@emernumber,subject=@subject,subfunction=@subfunction,category=@category,subcategory=@subcategory,eqpt=@eqpt,metainfo=@metainfo,fileid=@fileid,updatedby=@updateby,updatedon=@updateon,isactive=@isactive where id = @id");
-				var result = connection.Execute(query, emer);
-				return result > 0;
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
-		}
-		public bool DeactivateEmer(long Id)
-		{
-			try
-			{
-				string query = string.Format(@"update emer set isactive=0 where id = @id");
-				var result = connection.Execute(query);
-				return result > 0;
-			}
-			catch (Exception ex)
-			{
-				throw ex;
-			}
-		}
+        public bool AddEmerIndex(EmerIndex emer)
+        {
+            try
+            {
+                // Ensure that CreatedOn and UpdatedOn are DateTime values before the insert
+                if (emer.CreatedOn == default)
+                    emer.CreatedOn = DateTime.Now;
 
-		public long AddFile(Documents document)
+
+                string query = @"insert into emerindex 
+                            (emernumber, subject,  category, categoryid,  createdby, createdon, isactive,wing,wingid,filename,filepath)
+                          values 
+                            (@emernumber, @subject, @category, @categoryid,  @createdby, @createdon, @isactive,@wing,@wingid,@filename,@filepath)";
+
+                var result = connection.Execute(query, emer);
+                return result > 0;
+            }
+            catch (Exception ex)
+            {
+                // Handle exception (Log it)
+                throw ex;
+            }
+        }
+
+        public bool UpdateEmerIndex(EmerIndex emer)
+        {
+            try
+            {
+                string query = string.Format(@"update emer set emernumber=@emerNumber,subject=@subject,category=@category, where id = @id");
+                var result = connection.Execute(query, new
+                {
+                    emernumber = emer.EmerNumber,
+                    subject = emer.Subject,
+                    category = emer.Category
+                });
+                return result > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+        public async Task<bool> UpdateEmer(EmerModel emer)
+		{
+			try
+			{
+				string query = @"UPDATE emer SET
+                            emernumber = @EmerNumber,
+                            subject = @Subject,
+                            subfunction = @SubFunction,
+                            wing = @Wing,
+                            wingid = @WingId,
+                            category = @Category,
+                            categoryid = @CategoryId,
+                            subcategory = @SubCategory,
+                            subcategoryid = @SubCategoryId,
+                            eqpt = @Eqpt,
+							remarks = @Remarks,
+                            updatedby = @UpdatedBy,
+                            updatedon = @UpdatedOn,
+                            subfunctioncategory = @SubFunctionCategory,
+                            subfunctiontype = @SubFunctionType,filename = @FileName,filepath=@FilePath
+                         WHERE id = @Id";
+
+				var result = await connection.ExecuteAsync(query, emer);
+				return result > 0;
+			}
+			catch (Exception ex)
+			{
+				throw ex;
+			}
+		}
+       
+		
+		public bool DeactivateEmer(long Id)
+        {
+            try
+            {
+                string query = @"UPDATE emer SET isactive = 0 WHERE id = @Id";
+
+                // ✅ Pass the parameter here
+                var result = connection.Execute(query, new { Id });
+
+                return result > 0;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public long AddFile(Documents document)
 		{
 			try
 			{

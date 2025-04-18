@@ -19,16 +19,27 @@ export class EmerIndexComponent extends TablePaginationSettingsConfig{
   emerIndexList:EmerIndex[]=[];
   wingId:number;
   isRefresh:boolean=false;
+  userType;
   constructor(private apiService:ApiService,private authService:AuthService,private dialogService:BISMatDialogService){
     super();
+    this.userType = this.authService.getRoleType();
     this.tablePaginationSettings.enableAction = true;
-    this.tablePaginationSettings.enableEdit = true;
-    this.tablePaginationSettings.enableDelete = true;
+    if(this.userType != '2'){
+      this.tablePaginationSettings.enableEdit = true;
+      this.tablePaginationSettings.enableDelete = true;
+    }
     this.tablePaginationSettings.enableColumn = true;
     this.tablePaginationSettings.pageSizeOptions = [50, 100];
     this.tablePaginationSettings.showFirstLastButtons = false
     this.wingId = parseInt(this.authService.getWingId())
     this.getAllIndex();
+  }
+  edit(row){
+    row.isEdit = true;
+    this.dialogService.open(EmerIndexAddComponent,{data:row})
+  }
+  delete(row){
+
   }
   openDialog(){
     this.dialogService.open(EmerIndexAddComponent,null,'50vw')

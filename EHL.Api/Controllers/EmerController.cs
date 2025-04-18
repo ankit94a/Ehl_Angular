@@ -57,14 +57,20 @@ namespace EHL.Api.Controllers
 			return Ok(result);
 		}
 
-
-
 		[HttpPost, Route("update")]
-		public IActionResult UpdateEmer([FromBody] EmerModel emerModel)
+		public async Task<IActionResult> UpdateEmer([FromForm] EmerModel emerModel)
 		{
 			emerModel.UpdatedBy = HttpContext.GetUserId();
 			emerModel.UpdatedOn = DateTime.Now;
-			return Ok(_emmerManager.UpdateEmer(emerModel));
+			emerModel.IsActive = true;
+			emerModel.IsDeleted = false;
+			return Ok(await _emmerManager.UpdateEmer(emerModel));
+		}
+		
+		[HttpDelete,Route("{Id}")]
+		public IActionResult DeactivateEmer(long Id)
+		{
+			return Ok(_emmerManager.DeactivateEmer(Id));
 		}
 		[HttpDelete]
 		public IActionResult Deactivate([FromBody] EmerModel emerModel)
@@ -80,5 +86,35 @@ namespace EHL.Api.Controllers
 		{
 			return Ok(_emmerManager.GetEmerIndex(wingId));
 		}
-	}
+        [HttpPost, Route("index")]
+        public async Task<IActionResult> AddEmerIndex([FromForm] EmerIndex EmerIndex)
+        {
+            EmerIndex.CreatedBy = HttpContext.GetUserId();
+            EmerIndex.CreatedOn = DateTime.Now;
+            EmerIndex.IsActive = true;
+            EmerIndex.IsDeleted = false;
+
+            if (EmerIndex.EmerFile != null && EmerIndex.EmerFile.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await EmerIndex.EmerFile.CopyToAsync(memoryStream); // Use `await` for async file copying
+                    EmerIndex.FileBytes = memoryStream.ToArray();  // Store file content as byte array
+                }
+            }
+
+            // Save to database asynchronously
+            var result = await _emmerManager.AddEmerIndex(EmerIndex); // Ensure `AddEmerAsync` is an async method
+
+
+            return Ok(result);
+        }
+		[HttpPost, Route("index/update")]
+		public IActionResult UpdateEmerIndex ([FromForm] EmerIndex emerIndex)
+        {
+            emerIndex.UpdatedBy = HttpContext.GetUserId();
+            emerIndex.UpdatedOn = DateTime.Now;
+            return Ok(_emmerManager.UpdateEmerIndex(emerIndex));
+        }
+    }
 }

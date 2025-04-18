@@ -12,13 +12,15 @@ import { DownloadService } from 'projects/shared/src/service/download.service';
 import { AuthService } from 'projects/shared/src/service/auth.service';
 
 @Component({
-  selector: 'app-policy-list',
+  selector: 'app-policy-sidebar',
   standalone: true,
   imports: [SharedLibraryModule,ZipperTableComponent],
-  templateUrl: './policy-list.component.html',
-  styleUrl: './policy-list.component.scss'
+  templateUrl: './policy-sidebar.component.html',
+  styleUrl: './policy-sidebar.component.scss'
 })
-export class PolicyListComponent extends TablePaginationSettingsConfig{
+
+
+export class PolicySidebarComponent extends TablePaginationSettingsConfig{
   policyList:Policy[]=[];
   categoryList:Category[]=[];
   wingList:Wing[]=[];

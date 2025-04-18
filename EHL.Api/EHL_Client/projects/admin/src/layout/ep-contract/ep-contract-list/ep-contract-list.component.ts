@@ -19,18 +19,25 @@ export class EpContractListComponent extends TablePaginationSettingsConfig{
   epContractList:Policy[]=[];
   filterModel:PolicyFilterModel=new PolicyFilterModel();
   isRefresh:boolean=false;
+  userType;
   constructor(private apiService:ApiService,private authService:AuthService,private dailogService:BISMatDialogService){
     super()
-    this.tablePaginationSettings.enableAction = true;
-    this.tablePaginationSettings.enableEdit = true;
+    this.userType = this.authService.getRoleType();
+    // this.tablePaginationSettings.enableAction = true;
+    if(this.userType != '2'){
+      this.tablePaginationSettings.enableEdit = true;
     this.tablePaginationSettings.enableDelete = true;
+    }
+    
     this.tablePaginationSettings.pageSizeOptions = [50, 100];
     this.tablePaginationSettings.showFirstLastButtons = false;
     this.filterModel.wingId = parseInt(this.authService.getWingId())
     this.filterModel.type = 'Ep Contract'
     this.getAllContract()
   }
-
+  filterPolicy(type){
+    
+  }
   getAllContract(){
     this.apiService.postWithHeader('policy/type',this.filterModel).subscribe(res =>{
       if(res){

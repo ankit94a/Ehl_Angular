@@ -70,6 +70,39 @@ namespace EHL.Business.Implements
 			}
 		}
 
+
+		public async Task<bool> AddEmerIndex(EmerIndex emer)
+		{
+			try
+			{
+
+				if (emer.EmerFile != null && emer.EmerFile.Length > 0)
+				{
+					string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "index");
+					string filePath = Path.Combine(uploadsFolder, emer.EmerFile.FileName);
+					// Ensure the directory exists
+					if (!Directory.Exists(uploadsFolder))
+					{
+						Directory.CreateDirectory(uploadsFolder);
+					}
+
+					emer.FileName = emer.EmerFile.FileName;
+					emer.FilePath = emer.FileName;
+					// Save the file locally
+					using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+					{
+						await emer.EmerFile.CopyToAsync(fileStream);
+					}
+				}
+				return _emerDb.AddEmerIndex(emer);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Error: {ex.Message}");
+				throw new Exception("Error while adding the EmerModel data.", ex);
+			}
+		}
+
 		// Helper function to convert IFormFile to byte array
 		private byte[] ConvertToByteArray(IFormFile file)
 		{
@@ -80,11 +113,75 @@ namespace EHL.Business.Implements
 			}
 		}
 
-
-		public bool UpdateEmer(EmerModel emer)
+		public async Task<bool> UpdateEmerIndex(EmerIndex emer)
 		{
-			return _emerDb.UpdateEmer(emer);
+			try
+			{
+
+				if (emer.EmerFile != null && emer.EmerFile.Length > 0)
+				{
+					string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "index");
+					string filePath = Path.Combine(uploadsFolder, emer.EmerFile.FileName);
+					// Ensure the directory exists
+					if (!Directory.Exists(uploadsFolder))
+					{
+						Directory.CreateDirectory(uploadsFolder);
+					}
+
+					emer.FileName = emer.EmerFile.FileName;
+					emer.FilePath = emer.FileName;
+					emer.IsActive = true;
+					emer.IsDeleted = false;
+					// Save the file locally
+					using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+					{
+						await emer.EmerFile.CopyToAsync(fileStream);
+					}
+				}
+				return _emerDb.UpdateEmerIndex(emer);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Error: {ex.Message}");
+				throw new Exception("Error while adding the EmerModel data.", ex);
+			}
+
 		}
+		public async Task<bool> UpdateEmer(EmerModel emer)
+		{
+			try
+			{
+				if (emer.EmerFile != null && emer.EmerFile.Length > 0)
+				{
+					string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "emer");
+					string filePath = Path.Combine(uploadsFolder, emer.EmerFile.FileName);
+
+					// Ensure the directory exists
+					if (!Directory.Exists(uploadsFolder))
+					{
+						Directory.CreateDirectory(uploadsFolder);
+					}
+
+					emer.FileName = emer.EmerFile.FileName;
+					emer.FilePath = emer.FileName;
+
+					using (var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None))
+					{
+						await emer.EmerFile.CopyToAsync(fileStream);
+					}
+				}
+
+				// Just call the synchronous database method
+				bool result = await _emerDb.UpdateEmer(emer);
+				return result;
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Error: {ex.Message}");
+				throw new Exception("Error while updating EmerModel data.", ex);
+			}
+		}
+
 		public bool DeactivateEmer(long Id)
 		{
 			return _emerDb.DeactivateEmer(Id);

@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-md-10">Defect Reports</div>
       <div class="col-md-2">
-        <button class="btn btn-link" (click)="openDailog()">+ Add Report</button>
+        <button class="btn btn-link" (click)="openDailog()" *ngIf="userType != '2'">+ Add Report</button>
       </div>
     </div>
     <app-table *ngIf="defectReports.length > 0" [rowData]="defectReports" [tablePaginationSettings]="tablePaginationSettings"

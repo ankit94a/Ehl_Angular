@@ -10,7 +10,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^18.2.0",
+    "@angular/animations": "^18.2.13",
     "@angular/cdk": "^18.2.14",
     "@angular/common": "^18.2.0",
     "@angular/compiler": "^18.2.0",
@@ -32,6 +32,8 @@
     "ng2-charts": "^8.0.0",
     "ng2-pdf-viewer": "^10.4.0",
     "ngx-bootstrap": "^19.0.2",
+    "ngx-loading": "^17.0.0",
+    "ngx-spinner": "^19.0.0",
     "ngx-toastr": "^19.0.0",
     "pdfjs-dist": "^2.16.105",
     "rxjs": "~7.8.0",

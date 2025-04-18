@@ -17,12 +17,17 @@ export class DefectReportComponent extends TablePaginationSettingsConfig{
   defectReports:Policy[]=[];
   filterModel:Policy = new Policy();
   isRefresh:boolean=false;
+  userType;
   constructor(private authService:AuthService,private apiService:ApiService){
     super();
-    this.tablePaginationSettings.enableAction = true;
-    this.tablePaginationSettings.enableEdit = true;
-    // this.tablePaginationSettings.enableView = true;
-    this.tablePaginationSettings.enableDelete = true;
+    this.userType = this.authService.getRoleType();
+    // this.tablePaginationSettings.enableAction = true;
+    if(this.userType != '2'){
+      this.tablePaginationSettings.enableEdit = true;
+      // this.tablePaginationSettings.enableView = true;
+      this.tablePaginationSettings.enableDelete = true;
+    }
+    
     this.tablePaginationSettings.enableColumn = true;
     this.tablePaginationSettings.pageSizeOptions = [50, 100];
     this.tablePaginationSettings.showFirstLastButtons = false;
